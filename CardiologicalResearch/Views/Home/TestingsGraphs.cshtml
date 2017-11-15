@@ -1,0 +1,295 @@
+﻿@model IEnumerable<CardiologicalResearch.Models.ExaminationResultsView>
+@using CardiologicalResearch.Models;
+
+<script src="~/Scripts/jquery-ui-1.8.24.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-2.2.3.js"></script>
+<link href="~/Content/TestsStyle.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "TestingsHistory";
+    List<ExaminationResultsView> items = ViewBag.ViewItems;
+
+    List<DateTime> PositiveDates = ViewBag.PositiveDates;
+    List<int> PositiveNumbers = ViewBag.PositiveNumbers;
+
+    List<DateTime> NegativeDates = ViewBag.NegativeDates;
+    List<int> NegativeNumbers = ViewBag.NegativeNumbers;
+
+    List<String> testName = ViewBag.TestName;
+    List<int> testCount = ViewBag.TestCount;
+
+    List<String> someString = new List<String>();
+    int AI15Positive = (int)ViewBag.AI15Positive; 
+    int LI15Positive = (int)ViewBag.LI15Positive;
+    int SclerosisPositive = (int)ViewBag.SclerosisPositive;
+    int ABIPositive = (int)ViewBag.ABIPositive;
+    
+    //List<ExaminationResultsView.>
+    foreach (var item in items)
+    {
+         
+    }
+    
+    List<int> list = new List<int>();
+    list.Add(0);
+    list.Add(1);
+    list.Add(2);
+    list.Add(3);
+    list.Add(4);
+    list.Add(5);
+    object[] array = new object[5];
+    array[0] = 0;
+    array[1] = 1;
+
+
+
+    var b = 10;
+    string someVar="    ";
+    string rowClass;
+    
+}
+
+@{
+    string CustomText = "Диаграммы результатов";
+    string CustomTextEmpty = "Диаграммы результатов отсутствуют. Тесты не были пройдены";
+}
+
+@section featured {
+    <section class="featured" id="personalData"></section>
+}
+
+
+<section class="content" id="dataTargetField">
+    <h1 class="page-header">Личный кабинет</h1>
+    <h1 class="page-header ph2">Статистика тестирования в диаграммах</h1>
+
+@if (Model.Count() == 0)
+    {<text><h2 class="h2 dataTable">@CustomTextEmpty</h2></text>}
+    else
+    {<text>
+
+    <h2 class="h2 dataTable">@CustomText</h2>
+
+
+
+@*<div id="test" test-att=@Html.Raw(Json.Encode(items))></div> *@
+<div id="testName" test-att=@Html.Raw(Json.Encode(testName))></div> 
+<div id="testCount" test-att=@Html.Raw(Json.Encode(testCount))></div> 
+@*<div id="numbers" test-att3=@Html.Raw(Json.Encode(Numbers))></div> *@
+<script src="~/Scripts/Chart.js"></script>
+<h2 hidden="hidden" id="variable">@list</h2>
+
+<div id="AI" test-att=@Html.Raw(Json.Encode(AI15Positive))></div> 
+<div id="LI" test-att=@Html.Raw(Json.Encode(LI15Positive))></div> 
+<div id="Sclerosis" test-att=@Html.Raw(Json.Encode(SclerosisPositive))></div> 
+<div id="ABI" test-att=@Html.Raw(Json.Encode(ABIPositive))></div> 
+
+
+
+<!--<canvas id="myChart" width="400" height="400"></canvas>-->
+
+<div class="row">
+
+
+    <h2 class="h2 dataTable">Статистика прохождения пользователем тестов с результатом низкого/высокого риска заболевания</h2>
+    <h2 class="h2 dataTable">Диаграмма 1. Процент прохождения пользователем теста ArmsIndex15 с результатом низкого/высокого риска заболевания </h2>
+<canvas id="myPieChart1" style="width:10px; height:10px"></canvas>
+
+    <h2 class="h2 dataTable">Диаграмма 2. Процент прохождения пользователем теста LegsIndex15 с результатом низкого/высокого риска заболевания </h2>
+ <canvas id="myPieChart2" style="width:10px; height:10px"></canvas>
+
+
+    <h2 class="h2 dataTable">Диаграмма 3. Процент прохождения пользователем теста ЛПИ<0.9 с результатом низкого/высокого риска заболевания </h2>
+<canvas id="myPieChart3" style="width:10px; height:10px"></canvas>
+
+    <h2 class="h2 dataTable">Диаграмма 4. Процент прохождения пользователем теста Sclerosis a. tibialis с результатом низкого/высокого риска заболевания </h2>
+<canvas id="myPieChart4" style="width:10px; height:10px"></canvas>
+
+
+</div>
+<script>
+
+    @*list*@
+    var i;
+    var randomScalingFactor = function () {
+
+
+        var javascriptArray = JSON.parse($('#testName').attr('test-att'));
+
+
+        return javascriptArray;
+
+    }
+
+    var countValues = function ()
+    {
+        var javascriptArray = JSON.parse($('#testCount').attr('test-att'));
+        return javascriptArray;
+    }
+
+    var dataForAI = function ()
+    {
+        var posVal = JSON.parse($('#AI').attr('test-att'));
+        var negVal = 100 - posVal;
+        //var javascriptArray = JSON.stringify($('#negativeDates').attr('test-att'));
+        javascriptArray = new Array(posVal, negVal);
+
+        return javascriptArray;
+    }
+
+    var dataForLI = function () {
+        var posVal = JSON.parse($('#LI').attr('test-att'));
+        var negVal = 100 - posVal;
+        //var javascriptArray = JSON.stringify($('#negativeDates').attr('test-att'));
+        javascriptArray = new Array(posVal, negVal);
+
+        return javascriptArray;
+    }
+
+    var dataForSclerosis = function () {
+        var posVal = JSON.parse($('#Sclerosis').attr('test-att'));
+        var negVal = 100 - posVal;
+        //var javascriptArray = JSON.stringify($('#negativeDates').attr('test-att'));
+        javascriptArray = new Array(posVal, negVal);
+
+        return javascriptArray;
+    }
+
+    var dataForABI = function () {
+        var posVal = JSON.parse($('#ABI').attr('test-att'));
+        var negVal = 100 - posVal;
+        //var javascriptArray = JSON.stringify($('#negativeDates').attr('test-att'));
+        javascriptArray = new Array(posVal, negVal);
+
+        return javascriptArray;
+    }
+
+   /* var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: randomScalingFactor(),
+            datasets: [{
+                label: '% риска заболевания по тесту',
+                data: countValues()
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });*/
+
+    var ctx1 = document.getElementById("myPieChart1");
+
+    var myPieChart1 = new Chart(ctx1, {
+        type: 'doughnut',
+        data: {
+            labels: [
+    "Риск",
+    "Нет риска",
+            ],
+            datasets: [
+                {
+                    data: dataForAI(),
+                    backgroundColor: [
+                        "#FF6384",
+                        "#4BC0C0"
+                    ],
+                    hoverBackgroundColor: [
+                        "#FF6384",
+                         "#4BC0C0"
+                    ]
+                }]
+
+        }
+    });
+
+    var ctx2 = document.getElementById("myPieChart2");
+    var myPieChart2 = new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+            labels: [
+    "Риск",
+    "Нет риска",
+            ],
+            datasets: [
+                {
+                    data: dataForLI(),
+                    backgroundColor: [
+                        "#FF6384",
+                        "#4BC0C0"
+                    ],
+                    hoverBackgroundColor: [
+                        "#FF6384",
+                         "#4BC0C0"
+                    ]
+                }]
+
+        }
+    });
+
+  
+    var ctx3 = document.getElementById("myPieChart3");
+    var myPieChart3 = new Chart(ctx3, {
+        type: 'doughnut',
+        data: {
+            labels: [
+    "Риск",
+    "Нет риска",
+            ],
+            datasets: [
+                {
+                    data: dataForSclerosis(),
+                    backgroundColor: [
+                        "#FF6384",
+                        "#4BC0C0"
+                    ],
+                    hoverBackgroundColor: [
+                        "#FF6384",
+                         "#4BC0C0"
+                    ]
+                }]
+
+        }
+    });
+
+    var ctx4 = document.getElementById("myPieChart4");
+    var myPieChart4 = new Chart(ctx4, {
+        type: 'doughnut',
+        data: {
+            labels: [
+    "Риск",
+    "Нет риска",
+            ],
+            datasets: [
+                {
+                    data: dataForABI(),
+                    backgroundColor: [
+                        "#FF6384",
+                        "#4BC0C0"
+                    ],
+                    hoverBackgroundColor: [
+                        "#FF6384",
+                         "#4BC0C0"
+                    ]
+                }]
+
+        }
+    });
+
+
+</script>
+
+
+
+</text>
+}
+
+
+</section>

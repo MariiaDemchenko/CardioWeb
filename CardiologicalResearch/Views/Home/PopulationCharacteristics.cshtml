@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "PopulationCharacteristics";
+}
+
+<link href="~/Content/ResearchStyle.css" rel="stylesheet" />
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper" id="researchContent">
+
+        </div>
+    </section>
+}
+
+
+@{
+    int idBoguchar = 10;
+    int idSBP = 11;
+    int idDBP = 12;
+    int idABI = 13;
+    int idcfPWV = 14;
+    int idHealthGroups = 15;
+    int idBPHigh = 16;
+    int idUDR = 17;
+    int idCT = 18;
+    int idSclerosis = 19;
+}
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+<p class="float-right"><img alt=string.Empty src="/Images/BP.jpg" /><asp:Image ID="Image3" runat="server" Height="19px" ImageUrl="/Images/line.png" Width="1220px" /></p>
+<section class="about" id="details">
+     <h1 class="page-header">Результаты обследования</h1>
+    <p class="h1 research">Демографическая характеристика выборки</p>
+    <p>
+        С марта по ноябрь 2014 г. в
+        @Html.ActionLink("Богучарском районе Воронежской области", "Glossary", "Home", null, null, @idBoguchar.ToString(), null, new { @class = "a link" }) было последовательно обследовано 522 жителя старше 18 лет, у которых, помимо обязательных скрининговых процедур, пред усмотренных программой диспансеризации, выполнялось синхронное измерение АД на верхних и нижних конечностях с помощью МОС. Вычислялась разница
+        @Html.ActionLink("САД", "Glossary", "Home", null, null, @idSBP.ToString(), null, new { @class = "a link" })и
+        @Html.ActionLink("ДАД", "Glossary", "Home", null, null, @idDBP.ToString(), null, new { @class = "a link" })
+        на руках (∆САДр, ∆ДАДр) и ногах (∆САДн, ∆ДАДн), автоматически рассчитывалось значение
+        @Html.ActionLink("лодыжечно-плечевых индексов", "Glossary", "Home", null, null, @idABI.ToString(), null, new { @class = "a link" }) (ЛПИ), а также
+         @Html.ActionLink("скорость каротидно-феморальной пульсовой волны", "Glossary", "Home", null, null, @idcfPWV.ToString(), null, new { @class = "a link" }) (cfPWV).
+        Маркерами атеросклеротического поражения артерий являлись ЛПИ ≤0,9, cfPWV>10 м/с, │∆САДр│≥15 мм рт.ст., │∆САДн│≥15 мм.рт.ст.
+
+    </p>
+
+
+    <asp:Image ID="Image2" runat="server" Height="19px" ImageUrl="/Images/line.png" Width="1220px" />
+
+
+
+
+    &nbsp;<p class="h1 research">
+        Выводы
+    </p>
+    <p>
+        1. Благодаря простой диагностике атеросклеротического поражения, МОС позволяет без существенных дополнительных затрат и привлечения врачебного персонала увеличить при проведении скрининга на 7,6% численность III
+        @Html.ActionLink("группы здоровья", "Glossary", "Home", null, null,@idHealthGroups.ToString(), null, new { @class = "a link" })
+        и на 29,8% группу очень высокого ССР.
+    </p>
+    <p>
+        2. Компьютерная МОС выявляет
+        @Html.ActionLink("повышение АД 2 степени", "Glossary", "Home", null, null, @idBPHigh.ToString(), null, new { @class = "a link" })
+        у 19,6%, а изолированное повышение АД 1-ой степени только на левой руке – «трудно выявляемая АГ» у 7,5% обследованных и II группы здоровья , что способно заметно улучшить раннюю диагностику АГ.
+    </p>
+    <p>
+        3. При скрининге населения МОС обнаруживает признаки  мультифокального атеросклероза у 22% пациентов с ИБС или ЦВБ , что обеспечивает своевременную идентификацию больных с высоким риском развития сосудистых инцидентов не только в зоне основного поражения.
+    </p>
+    <p>
+        4. Компьютерная МОС позволяет уже на этапе скрининга более точно определить больных, нуждающихся в дополнительных обследованиях @Html.ActionLink("УЗ ДИ", "Glossary", "Home", null, null, @idUDR.ToString(), null, new { @class = "a link" }),
+        @Html.ActionLink("КТ-ангиография", "Glossary", "Home", null, null, @idCT.ToString(), null, new { @class = "a link" })
+        ), а также в специализированной медицинской помощи включая и высокотехнологичную по профилю сердечно-сосудистая хирургия.  
+    </p>
+</section>

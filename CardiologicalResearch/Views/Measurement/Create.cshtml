@@ -1,0 +1,427 @@
+﻿@model Measurement
+
+@{ string MedicalRecordId = ViewBag.MedicalRecordId;}
+@{
+    Html.EnableUnobtrusiveJavaScript(true);
+    var prevDatas = ViewBag.lastData;
+}
+
+@{
+    var prevAge = string.Empty;
+    var prevWeight = string.Empty;
+    var prevHeight = string.Empty;
+    var prevWaist = string.Empty;
+    var prevSBPra = string.Empty;
+    var prevDBPra = string.Empty;
+    var prevSBPll = string.Empty;
+    var prevSBPrl = string.Empty;
+    var prevPulse = string.Empty;
+    var prevcfPWV = string.Empty;
+    var prevbaPWV = string.Empty;
+    var prevGlucose = string.Empty;
+    var prevCholesterol = string.Empty;
+    var prevSCORE = string.Empty;
+
+    var prevGenderMale = string.Empty;
+    var prevGenderFemale = string.Empty;
+    var prevSmokeYes = string.Empty;
+    var prevSmokeNo = string.Empty;
+    var prevStenocardiaYes = string.Empty;
+    var prevStenocardiaNo = string.Empty;
+    var prevDiabetesYes = string.Empty;
+    var prevDiabetesNo = string.Empty;
+    var prevDiabetesUnknown = string.Empty;
+
+    var indAge = 0;
+    var indGender = 1;
+    var indSmoke = 2;
+    var indWeight = 3;
+    var indHeight = 4;
+    var indWaist = 5;
+    var indSBPra = 6;
+    var indDBPra = 7;
+    var indSBPll = 8;
+    var indSBPrl = 9;
+    var indPulse = 10;
+    var indcfPWV = 11;
+    var indbaPWV = 12;
+    var indGlucose = 13;
+    var indCholesterol = 14;
+    var indStenocardia = 15;
+    var indDiabetes = 16;
+    var indSCORE = 17;
+
+    var isNumber = false;
+    string placeholderString = string.Empty;
+}
+
+@using CardiologicalResearch
+@using CardiologicalResearch.Models;
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-2.2.3.js"></script>
+
+<link href="~/Content/TestsStyle.css" rel="stylesheet" />
+
+@section featured {
+    <section class="featured"></section>
+}
+
+<section class="content" id="dataTargetField">
+    <h1 class="page-header">Тестирование</h1>
+    <h1 class="page-header ph2">
+        Заполнение данных
+    </h1>
+
+    <form method="post" action="Create" id="dataTargetField">
+
+        @if (prevDatas != null)
+        {
+            if (prevDatas.Count != 0)
+            {
+                prevAge = prevDatas[indAge].Value;
+                if (prevDatas[indGender].Value == "мужской")
+                {
+                    prevGenderMale = "selected";
+                    prevGenderFemale = string.Empty;
+                }
+                else
+                {
+                    prevGenderMale = string.Empty;
+                    prevGenderFemale = "selected";
+                }
+                if (prevDatas[indSmoke].Value == "да")
+                {
+                    prevSmokeYes = "selected";
+                    prevSmokeNo = string.Empty;
+                }
+                else
+                {
+                    prevSmokeYes = string.Empty;
+                    prevSmokeNo = "selected";
+                }
+
+                if (prevDatas[indStenocardia].Value == "да")
+                {
+                    prevStenocardiaYes = "selected";
+                    prevStenocardiaNo = string.Empty;
+                }
+                else
+                {
+                    prevStenocardiaYes = string.Empty;
+                    prevStenocardiaNo = "selected";
+                }
+
+                if (prevDatas[indDiabetes].Value == "да")
+                {
+                    prevDiabetesYes = "selected";
+                    prevDiabetesNo = string.Empty;
+                    prevDiabetesUnknown = string.Empty;
+                }
+                else if (prevDatas[indDiabetes].Value == "нет")
+                {
+                    prevDiabetesYes = string.Empty;
+                    prevDiabetesNo = "selected";
+                    prevDiabetesUnknown = string.Empty;
+
+                }
+                else
+                {
+                    prevDiabetesUnknown = "selected";
+                    prevDiabetesYes = string.Empty;
+                    prevDiabetesNo = string.Empty;
+                }
+
+                prevWeight = prevDatas[indWeight].Value;
+                prevHeight = prevDatas[indHeight].Value;
+                prevWaist = prevDatas[indWaist].Value;
+                prevSBPra = prevDatas[indSBPra].Value;
+                prevDBPra = prevDatas[indDBPra].Value;
+                prevSBPll = prevDatas[indSBPll].Value;
+                prevSBPrl = prevDatas[indSBPrl].Value;
+                prevPulse = prevDatas[indPulse].Value;
+                prevcfPWV = prevDatas[indcfPWV].Value;
+                prevbaPWV = prevDatas[indbaPWV].Value;
+                prevGlucose = prevDatas[indGlucose].Value;
+                prevCholesterol = prevDatas[indCholesterol].Value;
+                prevSCORE = prevDatas[indSCORE].Value;
+            };
+        }
+
+        @if (ViewBag.ParameterId == ParameterType.Age)
+        {
+            isNumber = true;
+            placeholderString = Constants.AgePlaceholder;
+        }
+        else if (ViewBag.ParameterId == ParameterType.Weight)
+        {
+            isNumber = true;
+            placeholderString = Constants.WeightPlaceholder;
+        }
+        else if (ViewBag.ParameterId == ParameterType.Height)
+        {
+            isNumber = true;
+            placeholderString = Constants.HeightPlaceholder;
+        }
+        else if (ViewBag.ParameterId == ParameterType.Waist)
+        {
+            isNumber = true;
+            placeholderString = Constants.WaistPlaceholder;
+        }
+        else if (ViewBag.ParameterId == ParameterType.SBPra)
+        {
+            isNumber = true;
+            placeholderString = Constants.SBPraPlaceholder;
+        }
+        else if (ViewBag.ParameterId == ParameterType.DBPra)
+        {
+            isNumber = true;
+            placeholderString = Constants.DBPraPlaceholder;
+        }
+        else if (ViewBag.ParameterId == ParameterType.SBPll)
+        {
+            isNumber = true;
+            placeholderString = Constants.SBPllPlaceholder;
+        }
+        else if (ViewBag.ParameterId == ParameterType.SBPrl)
+        {
+            isNumber = true;
+            placeholderString = Constants.SBPrlPlaceholder;
+        }
+
+        else if (ViewBag.ParameterId == ParameterType.Pulse)
+        {
+            isNumber = true;
+            placeholderString = Constants.PulsePlaceholder;
+        }
+        else if (ViewBag.ParameterId == ParameterType.CfPWV)
+        {
+            isNumber = true;
+            placeholderString = Constants.CfPWVPlaceholder;
+        }
+        else if (ViewBag.ParameterId == ParameterType.BaPWV)
+        {
+            isNumber = true;
+            placeholderString = Constants.BaPWVPlaceholder;
+        }
+        else if (ViewBag.ParameterId == ParameterType.Glucose)
+        {
+            isNumber = true;
+            placeholderString = Constants.GlucosePlaceholder;
+        }
+        else if (ViewBag.ParameterId == ParameterType.SCORE)
+        {
+            isNumber = true;
+            placeholderString = Constants.CholesterolPlaceholder;
+        }
+
+        <div style="display:table">
+
+            <div style="display:table-cell; padding-left:4em; padding-right:2em">
+                <h2 class="h2 dataTable">Личные данные</h2>
+
+                <div class="input-group myInput">
+                    <span class="input-group-addon warningAddon" id="basic-addon1">Возраст</span>
+                    <input type="text" number="true" placeholder=@Constants.AgePlaceholder class="form-control" name="addedMeasurements[0].Value" value=@prevAge>
+                    <input type="hidden" name="addedMeasurements[0].MedicalRecordId" value=@MedicalRecordId />
+                    <input type="hidden" name="addedMeasurements[0].ParameterId" value=@ParameterType.Age />
+                </div>
+                <br />
+                <div class="input-group myInput">
+                    <span class="input-group-addon warningAddon" id="basic-addon1">Пол</span>
+
+                    <select id="countires" name="addedMeasurements[1].Value" class="btn btn-default dropdown-toggle">
+                        <option @prevGenderMale>мужской</option>
+                        <option @prevGenderFemale>женский</option>
+                    </select>
+
+                    <input type="hidden" name="addedMeasurements[1].MedicalRecordId" value=@MedicalRecordId />
+                    <input type="hidden" name="addedMeasurements[1].ParameterId" value=@ParameterType.Gender />
+                </div>
+                <br />
+                <div class="input-group myInput">
+                    <span class="input-group-addon warningAddon" id="basic-addon1">Курильщик</span>
+                    <select id="countires" name="addedMeasurements[2].Value" class="btn btn-default dropdown-toggle">
+                        <option @prevSmokeYes>да</option>
+                        <option @prevSmokeNo>нет</option>
+                    </select>
+                    <input type="hidden" name="addedMeasurements[2].MedicalRecordId" value=@MedicalRecordId />
+                    <input type="hidden" name="addedMeasurements[2].ParameterId" value=@ParameterType.Smoker />
+                </div>
+            </div>
+            <br />
+            <div style="display: table-cell; padding-left: 2em; padding-right: 2em">
+                <h2 class="h2 dataTable">Измерения</h2>
+                <div class="input-group myInput">
+                    <span class="input-group-addon warningAddon" id="basic-addon1">Вес</span>
+                    <input type="text" number="true" placeholder=@Constants.WeightPlaceholder class="form-control" name="addedMeasurements[3].Value" value=@prevWeight>
+                    <input type="hidden" name="addedMeasurements[3].MedicalRecordId" value=@MedicalRecordId />
+                    <input type="hidden" name="addedMeasurements[3].ParameterId" value=@ParameterType.Weight />
+                </div>
+                <br />
+                <div class="input-group myInput">
+                    <span class="input-group-addon warningAddon" id="basic-addon1">Рост</span>
+                    <input type="text" number="true" placeholder=@Constants.HeightPlaceholder class="form-control" name="addedMeasurements[4].Value" value=@prevHeight>
+                    <input type="hidden" name="addedMeasurements[4].MedicalRecordId" value=@MedicalRecordId />
+                    <input type="hidden" name="addedMeasurements[4].ParameterId" value=@ParameterType.Height />
+                </div>
+                <br />
+                <div class="input-group myInput">
+                    <span class="input-group-addon warningAddon" id="basic-addon1">ОТ</span>
+                    <input type="text" number="true" placeholder=@Constants.WaistPlaceholder class="form-control" name="addedMeasurements[5].Value" value=@prevWaist>
+                    <input type="hidden" name="addedMeasurements[5].MedicalRecordId" value=@MedicalRecordId />
+                    <input type="hidden" name="addedMeasurements[5].ParameterId" value=@ParameterType.Waist />
+                </div>
+                <br />
+            </div>
+            <div style="display: table-cell; padding-left: 2em; padding-right: 4em">
+                <h2 class="h2 dataTable">Давление</h2>
+                <div class="input-group myInput">
+                    <span class="input-group-addon warningAddon" id="basic-addon1">САДпр</span>
+                    <input type="text" number="true" placeholder=@Constants.SBPraPlaceholder class="form-control" name="addedMeasurements[6].Value" value=@prevSBPra>
+                    <input type="hidden" name="addedMeasurements[6].MedicalRecordId" value=@MedicalRecordId />
+                    <input type="hidden" name="addedMeasurements[6].ParameterId" value=@ParameterType.SBPra />
+                </div>
+                <br />
+                <div class="input-group myInput">
+                    <span class="input-group-addon warningAddon" id="basic-addon1">ДАДпр</span>
+                    <input type="text" number="true" placeholder=@Constants.DBPraPlaceholder class="form-control" name="addedMeasurements[7].Value" value=@prevDBPra>
+                    <input type="hidden" name="addedMeasurements[7].MedicalRecordId" value=@MedicalRecordId />
+                    <input type="hidden" name="addedMeasurements[7].ParameterId" value=@ParameterType.DBPra />
+                </div>
+                <br />
+                <div class="input-group myInput">
+                    <span class="input-group-addon warningAddon" id="basic-addon1">САДлн</span>
+                    <input type="text" number="true" placeholder=@Constants.SBPllPlaceholder class="form-control" name="addedMeasurements[8].Value" value=@prevSBPll>
+                    <input type="hidden" name="addedMeasurements[8].MedicalRecordId" value=@MedicalRecordId />
+                    <input type="hidden" name="addedMeasurements[8].ParameterId" value=@ParameterType.SBPll />
+                </div>
+                <br />
+                <div class="input-group myInput">
+                    <span class="input-group-addon warningAddon" id="basic-addon1">САДпн</span>
+                    <input type="text" number="true" placeholder=@Constants.SBPrlPlaceholder class="form-control" name="addedMeasurements[9].Value" value=@prevSBPrl>
+                    <input type="hidden" name="addedMeasurements[9].MedicalRecordId" value=@MedicalRecordId />
+                    <input type="hidden" name="addedMeasurements[9].ParameterId" value=@ParameterType.SBPrl />
+                </div>
+            </div>
+            <br />
+
+        </div>
+        <div style="display:table; padding-top:2em; padding-bottom:4em;">
+            <div style="display: table-cell; padding-left: 4em; padding-right: 2em">
+                <h2 class="h2 dataTable">Пульс</h2>
+                <div class="input-group myInput">
+                    <span class="input-group-addon warningAddon" id="basic-addon1">ЧСС</span>
+                    <input type="text" number="true" placeholder=@Constants.PulsePlaceholder class="form-control" name="addedMeasurements[10].Value" value=@prevPulse>
+                    <input type="hidden" name="addedMeasurements[10].MedicalRecordId" value=@MedicalRecordId />
+                    <input type="hidden" name="addedMeasurements[10].ParameterId" value=@ParameterType.Pulse />
+                </div>
+                <br />
+                <div class="input-group myInput">
+                    <span class="input-group-addon warningAddon" id="basic-addon1">cfPWV</span>
+                    <input type="text" number="true" placeholder=@Constants.CfPWVPlaceholder class="form-control" name="addedMeasurements[11].Value" value=@prevcfPWV>
+                    <input type="hidden" name="addedMeasurements[11].MedicalRecordId" value=@MedicalRecordId />
+                    <input type="hidden" name="addedMeasurements[11].ParameterId" value=@ParameterType.CfPWV />
+                </div>
+                <br />
+                <div class="input-group myInput">
+                    <span class="input-group-addon warningAddon" id="basic-addon1">baPWV</span>
+                    <input type="text" number="true" placeholder=@Constants.BaPWVPlaceholder class="form-control" name="addedMeasurements[12].Value" value=@prevbaPWV>
+                    <input type="hidden" name="addedMeasurements[12].MedicalRecordId" value=@MedicalRecordId />
+                    <input type="hidden" name="addedMeasurements[12].ParameterId" value=@ParameterType.BaPWV />
+                </div>
+
+            </div>
+            <div style="display:table-cell; padding-left:2em; padding-right:2em;">
+                <h2 class="h2 dataTable">Вещества крови</h2>
+                <div class="input-group myInput">
+                    <span class="input-group-addon warningAddon" id="basic-addon1">Глюкоза</span>
+                    <input type="text" number="true" placeholder=@Constants.GlucosePlaceholder class="form-control" name="addedMeasurements[13].Value" value=@prevGlucose>
+                    <input type="hidden" name="addedMeasurements[13].MedicalRecordId" value=@MedicalRecordId />
+                    <input type="hidden" name="addedMeasurements[13].ParameterId" value=@ParameterType.Glucose />
+                </div>
+                <br />
+                <div class="input-group myInput">
+                    <span class="input-group-addon warningAddon" id="basic-addon1">ОХ</span>
+                    <input type="text" number="true" placeholder=@Constants.CholesterolPlaceholder class="form-control" name="addedMeasurements[14].Value" value=@prevCholesterol>
+                    <input type="hidden" name="addedMeasurements[14].MedicalRecordId" value=@MedicalRecordId />
+                    <input type="hidden" name="addedMeasurements[14].ParameterId" value=@ParameterType.Cholesterol />
+                </div>
+            </div>
+            <div style="display:table-cell; padding-left:1em; padding-right:3em; ">
+                <h2 class="h2 dataTable">Заболевания в анамнезе</h2>
+                <div class="input-group myInput">
+                    <span class="input-group-addon warningAddon" id="basic-addon1">Стенокардия</span>
+                    <select id="countires" name="addedMeasurements[15].Value" class="btn btn-default dropdown-toggle">
+                        <option @prevStenocardiaYes>да</option>
+                        <option @prevStenocardiaNo>нет</option>
+                    </select>
+                    <input type="hidden" name="addedMeasurements[15].MedicalRecordId" value=@MedicalRecordId />
+                    <input type="hidden" name="addedMeasurements[15].ParameterId" value=@ParameterType.Stenocardia />
+                </div>
+                <br />
+                <div class="input-group myInput">
+                    <span class="input-group-addon warningAddon" id="basic-addon1">СД</span>
+                    <select id="countires" name="addedMeasurements[16].Value" class="btn btn-default dropdown-toggle">
+                        <option @prevDiabetesYes>да</option>
+                        <option @prevDiabetesNo>нет</option>
+                        <option @prevDiabetesUnknown>возможный</option>
+                    </select>
+                    <input type="hidden" name="addedMeasurements[16].MedicalRecordId" value=@MedicalRecordId />
+                    <input type="hidden" name="addedMeasurements[16].ParameterId" value=@ParameterType.Diabetes />
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <p class="center">
+            <button type="submit" class="btn successBtn">Сохранить</button>
+
+            @Ajax.ActionLink("Назад",
+         "Delete", "MedicalRecord", new { id = @MedicalRecordId },
+         new AjaxOptions
+         {
+             HttpMethod = "get",
+             OnSuccess = "asuccess(data)"
+         }, new { @class = "btn btn-default" })
+
+        </p>
+        <div id="myModal" class="modal fade" data-id=MedicalRecordId; role="dialog" aria-labelledby="myModalLabel" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            function asuccess(data) {
+                $('.modal-content').html(data); $('#myModal').modal('show');
+            }
+        </script>
+
+        <script type="text/javascript">
+
+            jQuery.validator.setDefaults({
+                debug: true,
+                success: "valid"
+            });
+
+            $(document).ready(function () {
+                $("#dataTargetField").validate({
+                    rules: {
+                        gender: "required"
+                    }
+                });
+            });
+        </script>
+
+    </form>
+</section>

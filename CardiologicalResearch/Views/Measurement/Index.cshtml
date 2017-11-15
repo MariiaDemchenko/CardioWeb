@@ -1,0 +1,17 @@
+﻿@model IEnumerable<CardiologicalResearch.Models.Measurement>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!--<link href="~/Content/bootstrap.css" rel="stylesheet" />-->
+<link href="~/Content/TestsStyle.css" rel="stylesheet" />
+@section featured {
+    <section class="featured">
+    </section>
+}
+
+
+
+@Html.Partial("StaticTable", Model)
+

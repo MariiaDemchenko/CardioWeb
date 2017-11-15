@@ -1,0 +1,191 @@
+﻿body {
+body {
+}
+
+.btn.successBtn
+{
+    background-color: #4BC0C0;
+    border-color: #4BC0C0;
+}
+
+.btn.successBtn:focus {
+  color: #fff;
+  background-color: #4BC0C0;
+  border-color: #4BC0C0;
+}
+.btn.successBtn:hover {
+    color: #fff;
+    background-color: #4BC0C0;
+    border-color: #4BC0C0;
+}
+
+
+
+.btn.dangerBtn
+{
+    background-color: #FF6384;
+    border-color: #FF6384;
+}
+
+.btn.dangerBtn:focus {
+  color: #fff;
+  background-color: #FF6384;
+  border-color: #FF6384;
+}
+.btn.dangerBtn:hover {
+    color: #fff;
+    background-color: #FF6384;
+    border-color: #FF6384;
+}
+
+
+.btn.warningBtn
+{
+    background-color: #FFCE56;
+    border-color: #FFCE56;
+}
+
+.btn.warningBtn:focus 
+{
+  color: #fff;
+  background-color: #FFCE56;
+  border-color: #FFCE56;
+}
+.btn.warningBtn:hover {
+    color: #fff;
+    background-color: #FFCE56;
+    border-color: #FFCE56;
+}
+
+
+.btn.infoBtn
+{
+    background-color: #36A2EB;
+    border-color: #36A2EB;
+}
+
+.btn.infoBtn:focus 
+{
+  color: #fff;
+  background-color: #36A2EB;
+  border-color: #36A2EB;
+}
+.btn.infoBtn:hover {
+    color: #fff;
+    background-color: #36A2EB;
+    border-color: #36A2EB;
+}
+
+.input-group-addon.warningAddon{
+    background-color: #FFCE56;
+}
+
+.content {
+background-color: white;
+}
+
+#dataTargetField
+{
+    padding: 1px 20px 20px 20px
+}
+
+.featured{
+    height:200px;
+    background: url("../Images/5.jpg") no-repeat;
+    background-size: 100%
+}
+
+#dataTableContent{
+    height:90px;
+    text-align:center;
+    
+}
+
+.center {
+ text-align:center;
+ padding-bottom:20px;
+}
+
+.h2.dataTable{
+    font-size:24px;
+    color:#808080;
+    text-align:center;
+}
+
+#dataTableTargetField
+{
+    padding: 1px 20px 20px 20px
+}
+
+#resultsTableTargetField
+{
+    padding: 1px 20px 20px 20px
+}
+
+.out {
+ padding-left:40px;
+ padding-top:10px;
+}
+
+.page-header
+{
+    margin-top:0px;
+    margin-bottom:0px;
+    color:white;
+    text-align:center;
+    background-color:gray;
+}
+
+.page-header.ph2
+{
+    margin-top:0px;
+    color:#ff0066;
+    text-align:center;
+    background-color:ivory;
+}
+
+#tests{
+    height:250px;
+    background: url("../Images/7.jpg") no-repeat;
+    background-size: 100%
+}
+
+#statistics{
+        height:450px;
+    background: url("../Images/3.jpg") no-repeat;
+    background-size: 100%
+}
+
+#personalData{
+    height:200px;
+    background: url("../Images/4.jpg") no-repeat;
+    background-size: 100%
+}
+
+#clasTreesField
+{
+    padding: 1px 20px 20px 20px;
+    width:1500px;
+}
+
+.input-group.form-control.myFormControl
+{
+    width:100px;
+}
+
+.input-group.myInput
+{
+    padding-left:1em;
+}
+
+#featureSelection{
+     height:250px;
+    background: url("../Images/background2.jpg") no-repeat;
+    background-size: 100%
+}
+
+#glossary{
+        height:200px;
+    background: url("../Images/6.jpg") no-repeat;
+    background-size: 100%
+}

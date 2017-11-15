@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "ClassificationTrees";
+}
+
+<link href="~/Content/ResearchStyle.css" rel="stylesheet" />
+
+<link href="~/Content/ClassTreesStyle.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui-1.8.24.js"></script>
+<script src="~/Scripts/jquery-2.2.3.js"></script>
+<script src="~/Scripts/Chart.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+   @section featured {
+    <section class="featured" id="classificationTrees"></section>
+}
+
+
+
+@{
+    
+    string Text;
+    Text = "Деревья решений - один из методов интеллектуального анализа данных. С помощью данного инструмента становится возможным не только оценить значимость диагностических предикторов, но также восстановить связь между предикторами и независимыми параметрами";
+    string ABI = "ЛПИ<0.9";
+    
+    
+}
+
+<section class="content" id="clasTreesField">
+
+
+
+
+    <h1 class="page-header">Результаты анализа данных</h1>
+
+    <h1 class="page-header ph2">
+    Описание маркеров атеросклероза</h1>
+
+    <h2 class="h2 dataTable">В ходе исследования рассматривался ряд основных маркеров атеросклеротического поражения артерий конечностей</h2>
+    
+    <div style="display: table; padding-left: 25em; padding-top: 1em; padding-bottom: 1em; ">
+
+        <div class="panel panel-danger" style="display: table-cell; width: 700px;  ">
+            <div class="panel-heading" style="text-align: center; font-size: 20px">
+                ArmsIndex15
+            </div>
+            <div class="panel-body" style="text-align: center; font-size: 18px">
+                Принимает значения:
+                <br />
+                1, если |∆САДр|⩾15
+                <br />
+                0, иначе
+            </div>
+        </div>
+    </div>
+
+    <div style="display: table; padding-left: 25em; padding-bottom: 1em; padding-top: 1em; ">
+        <div class="panel panel-warning" style="display: table-cell; width: 700px;  ">
+            <div class="panel-heading" style="text-align: center; font-size: 20px">
+                LegsIndex15
+            </div>
+            <div class="panel-body" style="text-align: center; font-size: 18px">
+                Принимает значения:
+                <br />
+                1, если |∆САДн|⩾15
+                <br />
+                0, иначе
+            </div>
+        </div>
+        </div>
+
+    <div style="display: table; padding-left: 25em; padding-bottom: 1em; padding-top: 1em;">
+
+            <div class="panel panel-success" style="display: table-cell; width: 700px;  ">
+                <div class="panel-heading" style="text-align: center; font-size: 20px">
+                    @ABI
+                </div>
+                <div class="panel-body" style="text-align: center; font-size: 18px">
+                    Принимает значения:
+                    <br />
+                    1, если САДлн/САДлр⩽0.9 или САДпн/САДпр⩽0.9
+                    <br />
+                    0, иначе
+                </div>
+            </div>
+            </div>
+       
+
+        <div style="display: table; padding-left: 25em; padding-bottom: 2em; padding-top: 1em;">
+            
+                <div class="panel panel-info" style="display: table-cell; width: 700px; ">
+                    <div class="panel-heading" style="text-align: center; font-size: 20px">
+                        Sclerosis a. tibialis
+                    </div>
+                    <div class="panel-body" style="text-align: center; font-size: 18px">
+                        Принимает значения:
+                        <br />
+                        1, если возраст>40 и ЛПИл(ЛПИп)>1.3
+                        <br />
+                        0, иначе
+                    </div>
+                </div>
+        </div>
+    <h2 class="h2 dataTable">В качестве приедполагаемых предикторов для этих переменных был выбран ряд медицинских показателей</h2>
+    <h2 class="h2 dataTable">Для восстановления связи между маркерами и предикторами был применен метод деревьев решений</h2>
+        <h2 class="h2 dataTable">В ознакомительных целях на сайте представлены результаты проведенного анализа</h2>
+
+        <p class="center">
+        @Html.ActionLink("Результаты построения деревьев решений", "Trees", null, new { @class = "btn infoBtn" })
+
+        @Html.ActionLink("Значимость предикторов", "Predictors", null, new { @class = "btn infoBtn" })
+        </p>
+        
+</section>
+
+
+
+
+

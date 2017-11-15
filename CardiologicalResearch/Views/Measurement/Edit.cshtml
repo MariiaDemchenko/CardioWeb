@@ -1,0 +1,274 @@
+﻿@model Measurement
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = null;
+
+}
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.js"></script>
+<!--<script src="~/Scripts/jquery-2.2.3.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+    
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>-->
+<link href="~/Content/TestsStyle.css" rel="stylesheet" />
+
+@using CardiologicalResearch.Models;
+
+@{string number="true";
+  string notNumber="false";
+  string numberProperty;
+  string agePlaceholder = "лет";
+  string weightPlaceholder = "кг";
+  string heightPlaceholder = "см";
+  string waistPlaceholder = "см";
+  string SBPraPlaceholder = "мм.рт.ст";
+  string DBPraPlaceholder = "мм.рт.ст";
+  string SBPllPlaceholder = "мм.рт.ст";
+  string SBPrlPlaceholder = "мм.рт.ст";
+  string pulsePlaceholder = "уд./мин";
+  string cfPWVPlaceholder = "мм/с";
+  string baPWVPlaceholder = "мм/c";
+  string GlucosePlaceholder = "ммоль/л";
+  string CholesterolPlaceholder = "ммоль/л";
+  string SCOREPlaceholder = "группа№";
+  string countable = "Значение является вычисляемым и не доступно для изменения пользователем.";
+  string placeholderString=string.Empty;
+
+  bool isNumber = false;
+  bool isCountable = false;
+  
+  List<SelectListItem> gender = new List<SelectListItem>();
+  gender.Add(new  SelectListItem(){Text="женский", Value="женский"});
+  gender.Add(new SelectListItem() { Text = "мужской", Value = "мужской" });
+
+  List<SelectListItem> yesNo = new List<SelectListItem>();
+  yesNo.Add(new SelectListItem() { Text = "да", Value = "да" });
+  yesNo.Add(new SelectListItem() { Text = "нет", Value = "нет" });
+  
+  
+  }
+ @using (Ajax.BeginForm(
+     "Edit",
+     "Data",
+     new AjaxOptions
+     {
+        
+         HttpMethod = "post",
+         UpdateTargetId = "dataTargetField",
+         OnSuccess = "$('body').removeClass('modal-open'); $('.modal-backdrop').remove();"
+         
+     }))
+{
+    <div class="modal-body">
+
+        @if (ViewBag.ParameterId == ParameterType.BMI ||
+                    ViewBag.ParameterId == ParameterType.CfPWV10)
+        { <text>
+        <h2 class="h2 dataTable" >@countable</h2>
+        </text>}
+               else
+        { 
+    <fieldset>
+
+        
+        
+        <div class="input-group">
+            <span class="input-group-addon warningAddon" id="basic-addon1">@ViewBag.ParameterId</span>
+
+           
+
+@if (ViewBag.ParameterId == ParameterType.Gender)
+{
+    isNumber = false;
+                @Html.DropDownList("Value", gender, new { @class = "btn btn-default dropdown-toggle" })}
+            else if (ViewBag.ParameterId == ParameterType.Smoker ||
+                    ViewBag.ParameterId == ParameterType.Diabetes ||
+                    ViewBag.ParameterId == ParameterType.Stenocardia)
+            {
+                isNumber = false;
+                @Html.DropDownList("Value", yesNo, new { @class = "btn btn-default dropdown-toggle" })}
+
+            else if (ViewBag.ParameterId == ParameterType.Age)
+            {
+                isNumber = true;
+                placeholderString = agePlaceholder;
+            }
+            else if (ViewBag.ParameterId == ParameterType.Weight)
+            {
+                isNumber = true;
+                placeholderString = weightPlaceholder;
+            }
+            else if (ViewBag.ParameterId == ParameterType.Height)
+            {
+                isNumber = true;
+                placeholderString = heightPlaceholder;
+            }
+            else if (ViewBag.ParameterId == ParameterType.Waist)
+            {
+                isNumber = true;
+                placeholderString = waistPlaceholder;
+            }
+            else if (ViewBag.ParameterId == ParameterType.SBPra)
+            {
+                isNumber = true;
+                placeholderString = SBPraPlaceholder;
+            }
+            else if (ViewBag.ParameterId == ParameterType.DBPra)
+            {
+                isNumber = true;
+                placeholderString = DBPraPlaceholder;
+            }
+            else if (ViewBag.ParameterId == ParameterType.SBPll)
+            {
+                isNumber = true;
+                placeholderString = SBPllPlaceholder;
+            }
+            else if (ViewBag.ParameterId == ParameterType.SBPrl)
+            {
+                isNumber = true;
+                placeholderString = SBPrlPlaceholder;
+            }
+
+            else if (ViewBag.ParameterId == ParameterType.Pulse)
+            {
+                isNumber = true;
+                placeholderString = pulsePlaceholder;
+            }
+            else if (ViewBag.ParameterId == ParameterType.CfPWV)
+            {
+                isNumber = true;
+                placeholderString = cfPWVPlaceholder;
+            }
+            else if (ViewBag.ParameterId == ParameterType.BaPWV)
+            {
+                isNumber = true;
+                placeholderString = baPWVPlaceholder;
+            }
+            else if (ViewBag.ParameterId == ParameterType.Glucose)
+            {
+                isNumber = true;
+                placeholderString = GlucosePlaceholder;
+            }
+            else if (ViewBag.ParameterId == ParameterType.SCORE)
+            {
+                isNumber = true;
+                placeholderString = CholesterolPlaceholder;
+            }
+
+            @Html.HiddenFor(model => model.MeasurementId)
+            @Html.HiddenFor(model => model.ParameterId)
+            @Html.HiddenFor(model => model.MedicalRecordId)
+
+
+          @if (isNumber)
+          {
+             <text>
+              <input type="number" placeholder=@placeholderString class="form-control" @Html.EditorFor(model => model.Value) @Html.ValidationMessageFor(model => model.Value) 
+                     </text>
+          }        
+         
+          @if (isCountable)
+              {
+             <text>
+              @countable
+                     </text>
+          } 
+        </div>
+            @*<div class="editor-field">
+                @Html.EditorFor(model => model.Value)
+                @Html.ValidationMessageFor(model => model.Value)
+            </div>
+            *@
+            @*<div class="editor-label">
+                    @Html.HiddenFor(model => model.MedicalRecordId, "MedicalRecord")
+                </div>
+                <div class="editor-field">
+                @Html.HiddenFor("MedicalRecordId", String.Empty)
+                @Html.ValidationMessageFor(model => model.MedicalRecordId)
+            </div>
+
+                <p>
+                    <input type="submit" value="Save" />
+                </p>*@
+
+            @* <div class="input-group">
+                    <span class="input-group-addon warningAddon" id="basic-addon1">@ViewBag.ParameterId</span>
+                    @if (ViewBag.ParameterId == CharacteristicTypes.Вес ||
+                        ViewBag.ParameterId == CharacteristicTypes.Age||
+                        ViewBag.ParameterId == CharacteristicTypes.Глюкоза||
+                        ViewBag.ParameterId == CharacteristicTypes.ДАДпр||
+                        ViewBag.ParameterId == CharacteristicTypes.ОТ||
+                        ViewBag.ParameterId == CharacteristicTypes.ОХ||
+                        ViewBag.ParameterId == CharacteristicTypes.Рост||
+                        ViewBag.ParameterId == CharacteristicTypes.САДлн||
+                        ViewBag.ParameterId == CharacteristicTypes.САДпн||
+                        ViewBag.ParameterId == CharacteristicTypes.САДпр||
+                        ViewBag.ParameterId == CharacteristicTypes.ЧСС||
+                        ViewBag.ParameterId == CharacteristicTypes.baPWV||
+                        ViewBag.ParameterId == CharacteristicTypes.cfPWV||
+                        ViewBag.ParameterId == CharacteristicTypes.SCORE
+                        )
+                    {numberProperty=number;
+                        <text>
+                    <input type="text" class="form-control" number="true" @Html.EditorFor(model => model.Value) @Html.ValidationMessageFor(model => model.Value)
+                           </text>
+                    }
+                    else if (ViewBag.ParameterId==CharacteristicTypes.Пол)
+                    {
+
+                        <text>
+
+                    <!--<select id="countires" class="btn btn-warning dropdown-toggle" >
+                        <option value=string.Empty>Выбрать</option>
+                        <option>мужской</option>
+                        <option>женский</option>
+                    </select>   -->
+                    @Html.DropDownList("Value", gender, new { @class = "btn btn-default dropdown-toggle"})
+                           </text>}
+
+                    else if (ViewBag.ParameterId == CharacteristicTypes.Курильщик ||
+                    ViewBag.ParameterId == CharacteristicTypes.СД ||
+                    ViewBag.ParameterId == CharacteristicTypes.Стенокардия
+                    )
+                    {
+                        <text>
+                    @Html.DropDownList("Value", yesNo, new { @class = "btn btn-default dropdown-toggle" })
+
+                           </text>
+                    }
+
+
+                </div>
+
+
+                @*<div class="editor-label">
+                    @Html.HiddenFor(model => model.MedicalRecordId, "MedicalRecord")
+                </div>
+                <div class="editor-field">
+                @Html.HiddenFor("MedicalRecordId", String.Empty)
+                @Html.ValidationMessageFor(model => model.MedicalRecordId)
+            </div>
+
+                <p>
+                    <input type="submit" value="Save" />
+                </p>*@
+</fieldset>}
+     </div>
+     <div class="modal-footer">
+
+@if (ViewBag.ParameterId == ParameterType.BMI ||
+                    ViewBag.ParameterId == ParameterType.CfPWV10)
+        { 
+     <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+}
+               else
+{ 
+            <button type="submit" class="btn btn-default">Изменить</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>}
+         </div>
+}
+
+
+
+

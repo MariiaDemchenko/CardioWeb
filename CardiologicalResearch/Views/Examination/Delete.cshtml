@@ -1,0 +1,57 @@
+﻿@model CardiologicalResearch.Models.Testing
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = null;
+}
+
+<script src="~/Scripts/bootstrap.js"></script>
+<link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<h2>Заполнение прервано</h2>
+
+
+
+<div class="modal-body" >
+<fieldset>
+   
+    
+    <div class="panel panel-danger">
+        <div class="panel-heading" style="text-align:center">
+            Заполнение прервано
+        </div>
+        <div class="panel-body" style="text-align:center">
+            Остановить заполнение?
+        </div>
+    </div>
+    
+    
+    <div hidden="hidden">
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TestingDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TestingDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MedicalRecord.MedicalRecordId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MedicalRecord.MedicalRecordId)
+    </div>
+        </div>
+</fieldset>
+</div>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <div class="modal-footer" >
+       
+
+                <button type="submit" class="btn btn-default">Выход</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+            </div>
+
+    </p>
+}

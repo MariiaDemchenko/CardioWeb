@@ -1,0 +1,67 @@
+﻿@model IEnumerable<CardiologicalResearch.Models.ExaminationResult>
+@{
+    ViewBag.Title = "ChooseTest";
+    var examinationId = ViewBag.ExaminationId;
+}
+
+
+
+@section featured {
+    <section class="featured" id="tests">
+
+    </section>
+}
+
+<link href="~/Content/TestsStyle.css" rel="stylesheet" />
+
+<section class="content">
+   
+    <h1 class="page-header">Тестирование</h1>
+    
+     @Html.ActionLink("Сохранить результаты и выйти", "Index", null, new { @class = "btn btn-default" })
+    </p>
+
+
+
+
+    <p>
+        @*Ajax.ActionLink("Выйти",
+            "Delete", "Testing", new { id = @TestingId },
+            new AjaxOptions
+            {
+                //UpdateTargetId = "dataTargetField",
+                //InsertionMode = InsertionMode.Replace,
+                HttpMethod = "get",
+                OnSuccess = "asuccess(data)"
+            })
+        *@
+    </p>
+
+    <div id="myModal" class="modal fade" data-id=item.DataId; role="dialog" aria-labelledby="myModalLabel" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript">
+        function asuccess(data) {
+            $('.modal-content').html(data); $('#myModal').modal('show');
+        }
+    </script>
+
+
+
+
+    <div id="resultsTableTargetField">
+
+        @Html.Partial("ResultsTable")
+
+
+
+    </div>
+</section>
+

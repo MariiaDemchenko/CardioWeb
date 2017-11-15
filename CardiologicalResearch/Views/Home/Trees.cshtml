@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "ClassificationTrees";
+}
+
+<link href="~/Content/ResearchStyle.css" rel="stylesheet" />
+
+<link href="~/Content/ClassTreesStyle.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui-1.8.24.js"></script>
+<script src="~/Scripts/jquery-2.2.3.js"></script>
+<script src="~/Scripts/Chart.js"></script>
+
+@section featured {
+    <section class="featured" id="classificationTrees"></section>
+}
+
+
+
+@{
+
+    string Text="Одним из основных преимуществ метода деревьев решений является наглядность.";
+    string Text1 = " Обход дерева производится по правилу: перейти на левую ветвь, если условие в узле выполняется, иначе перейти на правую ветвь.";
+    string Text2 =" Результатом обхода является определение принадлежности к одному из классов: высокого или низкого риска атеросклероза артерий конечностей (листья красного или зеленого цвета соответственно)";
+    string ABI = "ЛПИ<0.9";
+    
+    }
+
+<section class="content" id="clasTreesField">
+
+    <h1 class="page-header">Результаты анализа данных</h1>
+
+    <h1 class="page-header ph2">
+    Деревья решений</h1>
+
+    <h2 class="h2 dataTable">@Text
+    <br/>
+    @Text1
+    <br/>
+    @Text2 
+    
+    </h2>
+
+
+    <h2 class="h2 dataTable">Дерево решений для ArmsIndex15</h2>
+    <img src="/Images/ArmsIndex15.png" width="1500px">
+    <h2 class="h2 dataTable">Дерево решений для LegsIndex15</h2>
+    <img src="/Images/LegsIndex15.png" width="1500px">
+    <h2 class="h2 dataTable">Дерево решений для @ABI</h2>
+    <img src="/Images/LPI.jpg" width="1500px">
+    <h2 class="h2 dataTable">Дерево решений для Sclerosis a.tibialis</h2>
+    <img src="/Images/Sclerosis.png" width="1500px">
+
+
+</section>

@@ -1,0 +1,301 @@
+﻿@using CardiologicalResearch.Models
+@model CardiologicalResearch.Models.Measurement
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-2.2.3.js"></script>
+
+<link href="~/Content/TestsStyle.css" rel="stylesheet" />
+
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper" id="dataTableContent">
+            <h1>Заполнение таблицы данных</h1>
+        </div>
+    </section>
+}
+
+
+
+@*@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Data</legend>
+*@
+        <!--<div class="editor-label">
+           Вес
+        </div>
+        <div class="editor-field">
+            @*Html.EditorFor(model => model.Value)
+            @Html.ValidationMessageFor(model => model.Value)*@
+        </div>
+
+        <div class="editor-label">
+            Рост
+        </div>
+        <div class="editor-field">
+           @*Html.EditorFor(model => model.Value)
+          *@
+        </div>
+
+        <div class="editor-label">
+            Возраст
+        </div>
+        <div class="editor-field">
+            @*Html.EditorFor(model => model.Value)
+            @Html.ValidationMessageFor(model => model.Value)*@
+        </div>
+            -->
+<section class="content">
+    @if (prevDatas != null)
+        {
+            if (!String.IsNullOrEmpty(prevDatas[0].Value))
+            { prevAge = prevDatas[0].Value.ToString(); }
+        }
+
+    <form method="post" action="Create" id="dataTargetField">
+        <h1>Личные данные</h1>
+        <div class="input-group">
+            <span class="input-group-addon warningAddon" id="basic-addon1">Возраст</span>
+            <input type="text" name="datas[0].Value" value=@prevAge number="true" />
+            <input type="hidden" name="datas[0].MedicalRecordId" value=@MedicalRecordId />
+            <input type="hidden" name="datas[0].ParameterId" value=@ParameterType.Age />
+        </div>
+        <br />
+        <div class="input-group">
+            <span class="input-group-addon warningAddon" id="basic-addon1">Пол</span>
+            <!--<input type=string.Empty id="gender" name="datas[1].Value" value=string.Empty />-->
+
+            <select id="countires" name="datas[1].Value" class="btn btn-default dropdown-toggle">
+                <option value=string.Empty>Выбрать</option>
+                <option>мужской</option>
+                <option>женский</option>
+            </select>
+
+            <input type="hidden" name="datas[1].MedicalRecordId" value=@MedicalRecordId />
+            <input type="hidden" name="datas[1].ParameterId" value=@ParameterType.Gender />
+        </div>
+        <br />
+        <div class="input-group">
+            <span class="input-group-addon warningAddon" id="basic-addon1">Курильщик</span>
+            <select id="countires" name="datas[2].Value" class="btn btn-default dropdown-toggle">
+                <option value=string.Empty>Выбрать</option>
+                <option>да</option>
+                <option>нет</option>
+            </select>
+            <input type="hidden" name="datas[2].MedicalRecordId" value=@MedicalRecordId />
+            <input type="hidden" name="datas[2].ParameterId" value=@ParameterType.Smoker />
+        </div>
+        <br />
+        <h1>Измерения</h1>
+        <div class="input-group">
+            <span class="input-group-addon warningAddon" id="basic-addon1">Вес</span>
+            <input type="text" name="datas[3].Value" value=string.Empty number="true" />
+            <input type="hidden" name="datas[3].MedicalRecordId" value=@MedicalRecordId />
+            <input type="hidden" name="datas[3].ParameterId" value=@ParameterType.Weight />
+        </div>
+        <br />
+        <div class="input-group">
+            <span class="input-group-addon warningAddon" id="basic-addon1">Рост</span>
+            <input type="text" name="datas[4].Value" value=string.Empty number="true" />
+            <input type="hidden" name="datas[4].MedicalRecordId" value=@MedicalRecordId />
+            <input type="hidden" name="datas[4].ParameterId" value=@ParameterType.Height />
+        </div>
+        <br />
+        <div class="input-group">
+            <span class="input-group-addon warningAddon" id="basic-addon1">Объем талии</span>
+            <input type="text" name="datas[5].Value" value=string.Empty number="true" />
+            <input type="hidden" name="datas[5].MedicalRecordId" value=@MedicalRecordId />
+            <input type="hidden" name="datas[5].ParameterId" value=@ParameterType.Waist />
+        </div>
+        <br />
+        <h1>Давление</h1>
+        <div class="input-group">
+            <span class="input-group-addon warningAddon" id="basic-addon1">САДпр</span>
+            <input type="text" name="datas[6].Value" value=string.Empty number="true" />
+            <input type="hidden" name="datas[6].MedicalRecordId" value=@MedicalRecordId />
+            <input type="hidden" name="datas[6].ParameterId" value=@ParameterType.SBPra />
+        </div>
+        <br />
+        <div class="input-group">
+            <span class="input-group-addon warningAddon" id="basic-addon1">ДАДпр</span>
+            <input type="text" name="datas[7].Value" value=string.Empty number="true" />
+            <input type="hidden" name="datas[7].MedicalRecordId" value=@MedicalRecordId />
+            <input type="hidden" name="datas[7].ParameterId" value=@ParameterType.DBPra />
+        </div>
+        <br />
+        <div class="input-group">
+            <span class="input-group-addon warningAddon" id="basic-addon1">САДлн</span>
+            <input type="text" name="datas[8].Value" value=string.Empty number="true" />
+            <input type="hidden" name="datas[8].MedicalRecordId" value=@MedicalRecordId />
+            <input type="hidden" name="datas[8].ParameterId" value=@ParameterType.SBPll />
+        </div>
+        <br />
+        <div class="input-group">
+            <span class="input-group-addon warningAddon" id="basic-addon1">САДпн</span>
+            <input type="text" name="datas[9].Value" value=string.Empty number="true" />
+            <input type="hidden" name="datas[9].MedicalRecordId" value=@MedicalRecordId />
+            <input type="hidden" name="datas[9].ParameterId" value=@ParameterType.SBPrl />
+        </div>
+        <br />
+        <h1>Пульс</h1>
+        <div class="input-group">
+            <span class="input-group-addon warningAddon" id="basic-addon1">ЧСС</span>
+            <input type="text" name="datas[10].Value" value=string.Empty number="true" />
+            <input type="hidden" name="datas[10].MedicalRecordId" value=@MedicalRecordId />
+            <input type="hidden" name="datas[10].ParameterId" value=@ParameterType.Pulse />
+        </div>
+        <br />
+        <div class="input-group">
+            <span class="input-group-addon warningAddon" id="basic-addon1">cfPWV</span>
+            <input type="text" name="datas[11].Value" value=string.Empty number="true" />
+            <input type="hidden" name="datas[11].MedicalRecordId" value=@MedicalRecordId />
+            <input type="hidden" name="datas[11].ParameterId" value=@ParameterType.CfPWV />
+        </div>
+        <br />
+        <div class="input-group">
+            <span class="input-group-addon warningAddon" id="basic-addon1">baPWV</span>
+            <input type="text" name="datas[12].Value" value=string.Empty number="true" />
+            <input type="hidden" name="datas[12].MedicalRecordId" value=@MedicalRecordId />
+            <input type="hidden" name="datas[12].ParameterId" value=@ParameterType.BaPWV />
+        </div>
+        <br />
+        <h1>Вещества крови</h1>
+        <div class="input-group">
+            <span class="input-group-addon warningAddon" id="basic-addon1">Глюкоза</span>
+            <input type="text" name="datas[13].Value" value=string.Empty number="true" />
+            <input type="hidden" name="datas[13].MedicalRecordId" value=@MedicalRecordId />
+            <input type="hidden" name="datas[13].ParameterId" value=@ParameterType.Glucose />
+        </div>
+        <br />
+        <div class="input-group">
+            <span class="input-group-addon warningAddon" id="basic-addon1">Общий Холестерин</span>
+            <input type="text" name="datas[14].Value" value=string.Empty number="true" />
+            <input type="hidden" name="datas[14].MedicalRecordId" value=@MedicalRecordId />
+            <input type="hidden" name="datas[14].ParameterId" value=@ParameterType.Cholesterol />
+        </div>
+        <br />
+        <h1>Заболевания в анамнезе</h1>
+        <div class="input-group">
+            <span class="input-group-addon warningAddon" id="basic-addon1">Стенокардия</span>
+            <select id="countires" name="datas[15].Value" class="btn btn-default dropdown-toggle">
+                <option value=string.Empty>Выбрать</option>
+                <option>да</option>
+                <option>нет</option>
+            </select>
+            <input type="hidden" name="datas[15].MedicalRecordId" value=@MedicalRecordId />
+            <input type="hidden" name="datas[15].ParameterId" value=@ParameterType.Stenocardia />
+        </div>
+        <br />
+        <div class="input-group">
+            <span class="input-group-addon warningAddon" id="basic-addon1">Сахарный Диабет</span>
+            <select id="countires" name="datas[16].Value" class="btn btn-default dropdown-toggle">
+                <option value=string.Empty>Выбрать</option>
+                <option>да</option>
+                <option>нет</option>
+            </select>
+            <input type="hidden" name="datas[16].MedicalRecordId" value=@MedicalRecordId />
+            <input type="hidden" name="datas[16].ParameterId" value=@ParameterType.Diabetes />
+        </div>
+        <br />
+        <div class="input-group">
+            <span class="input-group-addon warningAddon" id="basic-addon1">Риск смертности от сердечно - сосудистых заболеваний</span>
+            <input type="text" name="datas[17].Value" value=string.Empty number="true" />
+            <input type="hidden" name="datas[17].MedicalRecordId" value=@MedicalRecordId />
+            <input type="hidden" name="datas[17].ParameterId" value=@ParameterType.SCORE />
+        </div>
+        <br />
+
+        <p>
+            <button type="submit" class="btn successBtn">Сохранить</button>
+
+
+            <!-- <a href="#myModal" class="btn btn-xs" role="button"  title="Галерея" ><span class="glyphicon glyphicon-camera"></span></a>-->
+            @Ajax.ActionLink("Назад ",
+         "Delete", "MedicalRecord", new { id = @MedicalRecordId },
+         new AjaxOptions
+         {
+             //UpdateTargetId = "dataTargetField",
+             //InsertionMode = InsertionMode.Replace,
+             HttpMethod = "get",
+             OnSuccess = "asuccess(data)"
+         }, new { @class = "btn btn-default" })
+
+        </p>
+
+
+        <div id="myModal" class="modal fade" data-id=MedicalRecordId; role="dialog" aria-labelledby="myModalLabel" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <script type="text/javascript">
+            function asuccess(data) {
+                $('.modal-content').html(data); $('#myModal').modal('show');
+            }
+        </script>
+
+
+
+
+
+
+        <script type="text/javascript">
+
+            jQuery.validator.setDefaults({
+                debug: true,
+                success: "valid"
+            });
+
+
+            $(document).ready(function () {
+                $("#dataTargetField").validate({
+                    rules: {
+                        gender: "required"
+                    }
+                });
+            });
+        </script>
+
+
+        @* <div>
+                        @Ajax.ActionLink("Hello ",
+            "Index", new @{id=@}
+               new AjaxOptions
+               {
+                   HttpMethod = "get",
+                   //OnSuccess = "asuccess(data)"
+               }, new { @class = "btn btnDeleteImg" })
+
+                    </div>
+
+                    @section Scripts {
+                        @Scripts.Render("~/bundles/jqueryval")
+                    }*@
+    </form>
+
+
+</section>
+
+
+    @*<div>
+            @Ajax.ActionLink("Back to List", "Index", new AjaxOptions {UpdateTargetId="targetField", HttpMethod = "get" })
+        </div>*@
+
+    @*  </fieldset>
+        }*@
+
+

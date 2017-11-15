@@ -1,0 +1,145 @@
+﻿@model CardiologicalResearch.Models.ExaminationResult
+
+@{
+    ViewBag.Title = "Create";
+    var examinationId=ViewBag.ExaminationId;
+}
+
+@using CardiologicalResearch.Models;
+
+@{
+    Html.EnableUnobtrusiveJavaScript(true);
+}
+
+<link href="~/Content/TestsStyle.css" rel="stylesheet" />
+
+@section featured {
+    <section class="featured" id="tests">
+
+    </section>
+}
+
+@{
+    string AI15Description = "Характеризует риск атеросклеротического поражения артерий верхних конечностей ";
+    string LI15Description = "Характеризует риск атеросклеротического поражения артерий нижних конечностей ";
+    string LPIDescription = "Характеризует риск ассиметрии систолического артериального давления на для верхних и нижних конечностей";
+    string SclerosisDescription = "Характеризует риск аретосклеротического поражения большеберцовых артерий";
+
+    string AI15Formula = "Исследуется предиктор: |ΔСАДр|≥15";
+    string LI15Formula = "Исследуется предиктор: |ΔСАДн|≥15";
+    string LPIFormula = "Исследуется предиктор: САДлн/САДлр⩽0.9 или САДпн/САДпр⩽0.9";
+    string SclerosisFormula = "Исследуется предиктор: Sclerosis a.tibialis";
+
+
+    int indArmsIndex15 = 0;
+    int indLegsIndex15 = 1;
+    int indLPI = 2;
+    int indSclerosis = 3;
+    
+    }
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-2.2.3.js"></script>
+
+<section class="content" id="dataTableTargetField">
+
+   <h1 class="page-header">Тестирование</h1>
+    <h1 class="page-header ph2"> Описание тестов</h1>
+<form method="post" action="Create" id="dataTargetField">
+
+    <h2 class="h2 dataTable" >Тест 1 </h2>
+    <div class="panel panel-danger">
+        <div class="panel-heading" style="text-align:center">
+           ArmsIndex15
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @AI15Description  
+        </div>
+        <div class="panel-footer" style="font-style:oblique; text-align:center">@AI15Formula</div>
+    </div>
+    <input type="hidden" name="addedExaminationResults[@indArmsIndex15].TestId" value=@TestType.ArmsIndex15 />
+    <input type="hidden" name="addedExaminationResults[@indArmsIndex15].ExaminationId" value=@examinationId />
+    <input type="hidden" name="addedExaminationResults[@indArmsIndex15].Result" value=@TestResultType.Unknown />
+
+    <h2 class="h2 dataTable">Тест 2 </h2>
+    <div class="panel panel-warning">
+        <div class="panel-heading" style="text-align:center">
+            LegsIndex15
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @LI15Description
+        </div>
+        <div class="panel-footer" style="font-style:oblique; text-align:center">@LI15Formula</div>
+    </div>
+
+
+    <input type="hidden" name="addedExaminationResults[@indLegsIndex15].TestId" value=@TestType.LegsIndex15 />
+    <input type="hidden" name="addedExaminationResults[@indLegsIndex15].ExaminationId" value=@examinationId />
+    <input type="hidden" name="addedExaminationResults[@indLegsIndex15].Result" value=@TestResultType.Unknown />
+
+    
+    <h2 class="h2 dataTable">Тест 3</h2>
+    <div class="panel panel-success">
+        <div class="panel-heading" style="text-align:center">
+            ЛПИ<0,9
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @LPIDescription
+        </div>
+        <div class="panel-footer" style="font-style:oblique; text-align:center">@LPIFormula</div>
+    </div>
+    <input type="hidden" name="addedExaminationResults[@indLPI].TestId" value=@TestType.ABI />
+    <input type="hidden" name="addedExaminationResults[@indLPI].ExaminationId" value=@examinationId />
+    <input type="hidden" name="addedExaminationResults[@indLPI].Result" value=@TestResultType.Unknown />
+    
+   
+    
+    <h2 class="h2 dataTable">Тест 4</h2>
+    <div class="panel panel-info">
+        <div class="panel-heading" style="text-align:center">
+            Sclerosis a. tibialis
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @SclerosisDescription
+        </div>
+        <div class="panel-footer" style="font-style:oblique; text-align:center">@SclerosisFormula</div>
+    </div>
+
+    <input type="hidden" name="addedExaminationResults[@indSclerosis].TestId" value=@TestType.Sclerosis />
+    <input type="hidden" name="addedExaminationResults[@indSclerosis].ExaminationId" value=@examinationId />
+    <input type="hidden" name="addedExaminationResults[@indSclerosis].Result" value=@TestResultType.Unknown />
+
+    
+
+    <p class="center">        
+        <button type="submit" class="btn successBtn">Пройти тестирование</button> 
+
+        @Ajax.ActionLink("Назад ",
+         "Delete", "Examination", new { id = @examinationId },
+         new AjaxOptions
+         {
+             HttpMethod = "get",
+             OnSuccess = "asuccess(data)"
+         }, new  {@class="btn btn-default" })
+    </p>
+
+    <div id="myModal" class="modal fade" data-id=MedicalRecordId; role="dialog" aria-labelledby="myModalLabel" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function asuccess(data) {
+            $('.modal-content').html(data); $('#myModal').modal('show');
+        }
+    </script>
+
+</form>
+</section>

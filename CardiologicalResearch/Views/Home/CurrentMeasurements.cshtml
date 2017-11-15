@@ -1,0 +1,75 @@
+﻿@model IEnumerable<CardiologicalResearch.Models.Measurement>
+
+@{
+    ViewBag.Title = "PersonalParameters";
+    DateTime lastDate=ViewBag.LastMedicalRecordDate;
+}
+
+@{
+    string CustomText = "Таблица данных";
+    string CustomTextEmpty = "Таблица данных пуста";
+
+    string ViewToChange = "DataTable ";
+    string rowClass;
+}
+
+<link href="~/Content/TestsStyle.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+@section featured {
+    <section class="featured" id="personalData"></section>
+}
+
+
+<section class="content" id="dataTableTargetField">
+    <h1 class="page-header">Личный кабинет</h1>
+    <h1 class="page-header ph2">Личные данные  </h1>
+
+
+
+
+@if (Model.Count() == 0)
+    {<text><h2 class="h2 dataTable">@CustomTextEmpty</h2></text>}
+    else
+    {<text>
+    <h2 class="h2 dataTable">
+        Дата последнего заполнения данных: @lastDate
+    </h2>
+        <h2 class="h2 dataTable" >@CustomText</h2>
+
+
+<table class="table table-bordered table-hover table-striped">
+    <tr>
+        <th>
+            @*Html.DisplayNameFor(model => model.ParameterId)*@
+            Название показателя
+        </th>
+        <th>
+            @*Html.DisplayNameFor(model => model.Value)*@
+            Значение показателя
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (String.IsNullOrEmpty(item.Value)) {rowClass="warning";}
+        else { rowClass = "info"; }
+        <tr class=@rowClass>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParameterId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value)
+            </td>
+        </tr>
+    }
+
+</table>
+</text>
+}
+    <p class="center">
+@Html.ActionLink("История", "Measurements", null, new {@class="btn successBtn" })
+        @Html.ActionLink("Статистика в диаграммах", "ParametersGraphs", null, new { @class = "btn dangerBtn" })
+    @Html.ActionLink("Назад", "PersonalAccount", null, new { @class = "btn btn-default" })
+        </p>
+</section>

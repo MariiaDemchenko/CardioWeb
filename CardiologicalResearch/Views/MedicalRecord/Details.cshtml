@@ -1,0 +1,29 @@
+﻿@model CardiologicalResearch.Models.MedicalRecord
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>MedicalRecord</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MedicalRecordDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MedicalRecordDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User.UserName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User.UserName)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.MedicalRecordId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

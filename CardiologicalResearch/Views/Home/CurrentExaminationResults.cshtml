@@ -1,0 +1,99 @@
+﻿@using CardiologicalResearch.Models;
+@model IEnumerable<ExaminationResult>
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-2.2.3.js"></script>
+<link href="~/Content/TestsStyle.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "PersonalTestings";
+
+    var lastDate = DateTime.Now;
+    if (ViewBag.UserCurrentTestingDate != null)
+    {
+        lastDate = ViewBag.LastTestingDate;
+    }
+}
+
+@{
+    var customText = "Таблица результатов";
+    var customTextEmpty = "Таблица результатов пуста";
+    string rowClass;
+}
+
+@section featured {
+    <section class="featured" id="personalData"></section>
+}
+
+<section class="content" id="resultsTableTargetField">
+    <h1 class="page-header">Личный кабинет</h1>
+    <h1 class="page-header ph2">Результаты тестирования</h1>
+    @if (!Model.Any())
+    {<text>
+
+
+        <h2 class="h2 dataTable">@customTextEmpty</h2></text>}
+    else
+    {<text>
+
+        <h2 class="h2 dataTable">
+            дата последнего прохождения теста: @lastDate
+        </h2>
+
+        <h2 class="h2 dataTable">@customText</h2>
+
+
+
+        <table class="table table-bordered table-hover table-striped">
+            <tr>
+                <th>
+                    @*Html.DisplayNameFor(model => model.ParameterId)*@
+                    Название теста
+                </th>
+                <th>
+                    @*Html.DisplayNameFor(model => model.Value)*@
+                    Результат Теста
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                if (item.Result == TestResultType.Unknown)
+                {
+                    rowClass = "warning";
+                }
+                else { rowClass = item.Result.ToString(); }
+                <tr class=@rowClass>
+                    <td>
+                        @if (item.TestId == TestType.ABI)
+                        {
+                            <text>ЛПИ 0.9</text>
+                        }
+                        else if (item.TestId == TestType.Sclerosis)
+                        {
+                            <text>Sclerosis a.tibialis</text>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.TestId)
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Result)
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+
+    </text>
+    }
+
+    <p class="center">
+
+        @Html.ActionLink("История", "TestingsHistory", null, new { @class = "btn successBtn" })
+        @Html.ActionLink("Статистика в диаграммах", "TestingsGraphs", null, new { @class = "btn dangerBtn" })
+        @Html.ActionLink("Назад", "PersonalAccount", null, new { @class = "btn btn-default" })
+    </p>
+</section>

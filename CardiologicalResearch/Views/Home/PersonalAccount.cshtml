@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+
+<link href="~/Content/TestsStyle.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+@section featured {
+    <section class="featured" id="statistics"></section>
+}
+
+<section id="resultsTableTargetField" class="content">
+<h1 class="page-header">Личный кабинет</h1>
+
+<h2 class="h2 dataTable">
+    Ваш личный кабинет предоставляет возможность ознакомиться с историей Ваших медицинских данных и результатов пройденных тестов, а также изучить персональную статистику, отраженную в диаграммах. 
+</h2>
+
+    <div class="panel panel-warning">
+        <div class="panel-heading" style="text-align:center">
+            Внимание!
+        </div>
+        <div class="panel-body" style="text-align:center">
+            Информация личного кабинета пользователя индивидуальна и не доступна для просмотра и распространения другими посетителями сайта.
+        </div>
+    </div>
+
+<p class="center">
+@Html.ActionLink("Статистика личных данных", "PersonalParameters", null, new {@class="btn warningBtn" })
+
+@Html.ActionLink("Статистика результатов тестирования", "PersonalTestings", null, new { @class = "btn infoBtn" })
+    </p>
+</section>
+@*
+    <article>
+        <p>
+            Use this area to provide additional information.
+        </p>
+
+        <p>
+            Use this area to provide additional information.
+        </p>
+
+        <p>
+            Use this area to provide additional information.
+        </p>
+    </article>
+
+    <aside>
+        <h3>Aside Title</h3>
+        <p>
+            Use this area to provide additional information.
+        </p>
+        <ul>
+            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+            <li>@Html.ActionLink("Личный Кабинет", "PersonalAccount", "Home")</li>
+            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+        </ul>
+    </aside>
+*@

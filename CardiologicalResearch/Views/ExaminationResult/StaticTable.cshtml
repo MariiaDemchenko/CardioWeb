@@ -1,0 +1,130 @@
+﻿@model IEnumerable<CardiologicalResearch.Models.ExaminationResult>
+
+@{
+    ViewBag.Title = "StaticTable";
+}
+
+@{
+    string CustomText = "Таблица результатов";
+    string CustomTextEmpty = "Результаты тестирования отсутствуют";
+
+    string FillInTable = "Перейти к описанию тестов";
+    string FillInTableEmpty = "Перейти к описанию тестов";
+
+    string rowClass = "warning";
+    string ViewToChange = "DataTable ";
+
+}
+
+<link href="~/Content/TestsStyle.css" rel="stylesheet" />
+@using CardiologicalResearch.Models;
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<section class="content">
+
+    
+
+
+    <div id="dataTargetField">
+        <h1 class="page-header">Тестирование </h1>
+        <h1 class="page-header ph2">Текущие результаты</h1> 
+
+        @if (!Model.Any())
+        {
+
+            <text><h2 class="h2 dataTable">@CustomTextEmpty</h2></text>}
+        else
+        {<text>
+         
+            <h2 class="h2 dataTable" >@CustomText</h2>
+
+            <table class="table table-bordered table-hover table-striped">
+                <tr>
+                    <th>
+                        Название теста
+                    </th>
+                    <th>
+                        Результат Теста
+                    </th>
+
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    if (item.Result == TestResultType.Unknown)
+                    {
+                        rowClass = "warning";
+                    }
+                    else if (item.Result == TestResultType.Success)
+                    {
+                        rowClass = "success";
+                    }
+                    else if (item.Result == TestResultType.Danger)
+                    {
+                        rowClass = "danger";
+                    }
+                    else if (item.Result == TestResultType.Error)
+                    {
+                        rowClass = "error";
+                    }
+                    <tr class=@rowClass>
+                        <td>
+                             @if (item.TestId == TestType.ABI)
+                        {
+                            <text>
+                        ЛПИ<0.9
+                        </text> 
+                        }
+                        else if (item.TestId == TestType.Sclerosis)
+                        {
+                            <text>
+                        Sclerosis a.tibialis
+                        </text> 
+                        }
+                        else 
+                        {
+                             @Html.DisplayFor(modelItem => item.TestId)
+                        }
+                       
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Result)
+                        </td>
+
+                    </tr>
+                }
+
+            </table>
+
+        </text>}
+        <p class="center">
+        @if (Model.Count() == 0)
+        {<text>@*@FillInTableEmpty*@
+        @Html.ActionLink(@FillInTableEmpty, "Create", null, new { @class = "btn dangerBtn" })
+            @Html.ActionLink("Назад", "Index", "Measurement", null, new { @class = "btn dangerBtn" })
+            </text>
+        }
+        else
+        {@*@FillInTable*@<text>@Html.ActionLink(@FillInTable, "Create", null, new { @class = "btn dangerBtn" })
+            @Html.ActionLink("Назад", "Index", "Measurement", null, new { @class = "btn btn-default" })
+            </text>}
+
+            </p>
+        @*if (Model.Count() != 0)
+            { <text>
+
+                @*Ajax.ActionLink("Изменить данные ",
+                    "UpdateData",
+                    new AjaxOptions
+                    {
+                        UpdateTargetId = "dataTargetField",
+                        InsertionMode = InsertionMode.Replace,
+
+                    })*@
+        @*    @Html.ActionLink("Изменить данные", "СhooseTest")
+
+            </text>
+            }*@
+
+    </div>
+</section>

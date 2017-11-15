@@ -1,0 +1,75 @@
+﻿@model IEnumerable<CardiologicalResearch.Models.DataView>
+@using CardiologicalResearch.Models;
+@{
+    ViewBag.Title = "ParametersHistory";
+    List<DataView> items = ViewBag.ViewItems;
+}
+
+<link href="~/Content/TestsStyle.css" rel="stylesheet" />
+@{
+    string CustomText = "История заполнения данных";
+    string CustomTextEmpty = "История пуста";
+    string rowClass;
+    //string ViewToChange = "DataTable ";
+
+}
+
+@section featured {
+    <section class="featured" id="personalData"></section>
+}
+
+<section class="content" id="dataTargetField">
+    <h1 class="page-header">Личный кабинет</h1>
+    <h1 class="page-header ph2">История заполнения данных</h1>
+
+@if (Model.Count() == 0)
+    {<text><h2 class="h2 dataTable" >@CustomTextEmpty</h2></text>}
+    else
+    {<text>
+
+        <h2 class="h2 dataTable">@CustomText</h2>
+
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+<table class="table table-bordered table-hover table-striped">
+    <tr>
+        <th>
+            @*Html.DisplayNameFor(model => model.ParameterId)*@
+            Дата
+        </th>
+        <th>
+            @*Html.DisplayNameFor(model => model.ParameterId)*@
+            Название показателя
+        </th>
+        <th>
+            @*Html.DisplayNameFor(model => model.Value)*@
+            Значение показателя
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (String.IsNullOrEmpty(item.Value))
+        {
+            rowClass = "warning";
+        }
+        else { rowClass = "info"; }
+        <tr class=@rowClass>
+            <td>
+                @Html.DisplayFor(modelItem => item.MedicalRecordDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParameterId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value)
+            </td>
+        </tr>
+    }
+
+</table>
+</text>
+}
+    @Html.ActionLink("Назад", "PersonalParameters", null, new { @class = "btn btn-default" })
+</section>

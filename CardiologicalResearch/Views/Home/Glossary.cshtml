@@ -1,0 +1,401 @@
+﻿@{
+    ViewBag.Title = "Glossary";
+}
+
+@section featured { 
+    <section class="featured" id="glossary"></section>
+}
+
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/TestsStyle.css" rel="stylesheet" />
+
+@using System.IO;
+
+@{
+    
+    string termDispancerization = "Диспансеризация";
+    string termScrining = "Скрининг";
+    string termSCORE = "Шкала SCORE";
+    string termAntiHypertenzia = "Антигипертензивные средства";
+    string termStatines = "Статины";
+    string termTriglicerides = "Триглицериды";
+    string termGlucose = "Глюкоза";
+    string termHCLVP = "Хс-ЛВП";
+    string termMVS = "Многоканальная объемная сфигмография (МОС)";
+    string termBoguchar = "Богучарский район Воронежской области";
+    string termSBP = "Систолическое (верхнее) артериальное давление (САД)";
+    string termDBP = "Диастолическое (нижнее) артериальное давление (ДАД)";
+    string termABI = "Лодыжечно - плечевой индекс (ЛПИ)";
+    string termPWV = "Пульсовая волна (cfPWV)";
+    string termHealthGroups = "Группы здоровья";
+    string termBPHigh = "Повышение АД II степени";
+    string termUDR = "Ультразвуковое дуплексное обследование";
+    string termCT = "Компьютерная томографическая ангиография (КТ-ангиография, КТА)";
+    string termSclerosis = "Sclerosis a. tiabalis";
+    string termCholesterol = "Холестерин";
+    string termArteriesSclerosis = "Атеросклероз";
+    string termcfPWV = "Каротидно - феморальная пульсовая волна (cfPWV)";
+    string termbaPWV = "Лодыжечно-плечевая пульсовая волна (baPWV)";
+    string termStenocardia = "Стенокардия";
+    string termDiabetes = "Сахарный диабет (СД)";
+    
+    
+    int idDispancerization = 1;
+    int idScrining = 2;
+    int idSCORE = 3;
+    int idAntiHypertenzia = 4;
+    int idStatines = 5;
+    int idTriglicerides = 6;
+    int idGlucose = 7;
+    int idHCLVP = 8;
+    int idMVS = 9;
+    int idBoguchar = 10;
+    int idSBP = 11;
+    int idDBP = 12;
+    int idABI = 13;
+    int idPWV = 14;
+    int idHealthGroups = 15;
+    int idBPHigh = 16;
+    int idUDR = 17;
+    int idCT = 18;
+    int idSclerosis = 19;
+    int idCholesterol = 20;
+    int idArteriesSclerosis = 21;
+    int idcfPWV = 22;
+    int idbaPWV = 23;
+    int idStenocardia = 24;
+    int idDiabetes = 25;
+    
+    
+    
+    string descDispancerization1 = "Представляет собой комплекс мероприятий, в том числе медицинский осмотр врачами нескольких специальностей и выполнение необходимых лабораторных и инструментальных обследований, осуществляемых для \n";
+    string descDispancerization2 = "1. Раннего выявления хронических неинфекционных заболеваний, являющихся основной причиной инвалидности и преждевременной смертности населения, а также факторов риска их развития.";
+
+    string descDispancerization3 = "2. Формирования групп состояния здоровья и выработки индивидуальных рекомендаций по диагностике, лечению и наблюдению каждого пациента.";
+
+    string descDispancerization4 = "(Приказ МЗ РФ от 3 декабря 2012 г. № 1006н 'Порядок проведения диспансеризации определенных групп взрослого населения')";
+
+
+    string descScrining1="Первый этап диспансеризации населения, направленный на ";
+    string descScrining2 = "1) выявление признаков хронических неинфекционных заболеваний;";
+    string descScrining3 = "2) выявление факторов риска их развития;";
+    string descScrining4 = "3) определение медицинских показаний к выполнению дополнительных обследований и осмотров врачами-специалистами для уточнения диагноза. ";
+    string descScrining5 = "Наиболее критическими моментами скрининга являются: ";
+    string descScrining6 = "- одномоментное обследование большого числа взрослого населения;";
+    string descScrining7 = "- согласованное действие медицинского персонала;";
+    string descScrining8 = "- точность выполнения стандартных операций и процедур;";
+    string descScrining9 = "- комплаентность пациентов;";
+    string descScrining10 = "- укомплектованность первичного звена здравоохранения;";
+    
+
+
+    string descSCORE = "Европейская шкала для расчёта риска смерти от сердечно-сосудистого заболевания в ближайшие 10 лет.";
+    descSCORE += "Ниже представлена версия для европейских стран высокого риска (к которым относится и Россия).";
+    descSCORE += "Как следует из шкалы, риск умереть от сердечно-сосудистого заболевания у курящего мужчины 65-ти лет со средним систолическим артериальным давлением около 180 мм рт.ст. и общим холестерином 8 ммоль/л в ближайшие 10 лет составляет 47 %.";
+    string descAntiHypertenzia = "Средства, понижающие повышенное артериальное давление.";
+    string descStatines = "Средства для снижения холестерина.";
+    string descTriglicerides = "Представляют собой органические соединения, относящиеся к липидам - нейтральные жиры. В организме человека выполняют сразу несколько функций, главные среди которых – это сохранение энергозапаса в жировых тканях и поддержание структуры всех клеточных мембран.";
+    string descGlucose = "Бесцветное кристаллическое вещество крови. Она считается самым универсальным источником энергии, требуемой для жизнедеятельности клеток организма. ";
+    string descHCLVP = "Холестерол - липопротеины высокой плотности - соединения, состоящие из липидов (жиров) и белков. Они обеспечивают переработку и выведение жиров из организма, поэтому их называют «хорошим холестерином».";
+    string descMVS = "Сфигмография — это графическая регистрация пульсовых колебаний сосудов, позволяющая судить об их упруго-вязких свойствах. ";
+    descMVS +="Различают сфигмограмму центрального (аортограмма, пульс подключичной и сонной артерий) и периферического пульса (артерии конечностей). ";
+     descMVS +="Для неврологической диагностики наибольший интерес представляет сфигмограмма сонных, поверхностных височных, глазничных, лобных артерий, а также артерий конечностей Полученные данные позволяют судить об атеросклерозе определенных участков сосудов, гипертонической болезни и ряде других патологических процессах, при которых нарушается эластичность сосудов. Различают прямую и объемную сфигмографию. Прямая, или обычная, сфигмография регистрирует деформации в ограниченном участке стенки сосуда при помощи пелотных датчиков или воронок с воздушной передачей, которые во время исследования фиксируют над пульсирующим сосудом. ";
+    
+    string descBoguchar = "Административная единица на юго-востоке Воронежской области с населением 35602 человек, из них 28958 (81,3%) взрослые и 10590 (30%) пенсионеры. В сельском хозяйстве, пищевой и перерабатывающей промышленности занято 16800 (47%) человек. Расстояние до Воронежа 235 км., время в пути 3 часа.";
+    string descSBP = "Давление крови в артериях в момент систолы (сокращения) сердца. ";
+    string descDBP = "Давление крови, которое присутствует в сосудах в момент диастолы (расслабления) сердца.";
+    string descABI = "Представляет собой отношение кровяного давления в нижней части ноги или лодыжке, к кровяному давлению в руке.";
+    string descPWV = "Пульсовая волна — это распространяющаяся по аорте и артериям волна повышенного давления, вызванная выбросом крови из левого желудочка в период систолы. ";
+    descPWV+="Распространяясь от аорты до капилляров, пульсовая волна затухает.";
+    descPWV+=" Поскольку аорта является главным кровеносным сосудом, то аортальная скорость пульсовой волны представляет наибольший интерес с медицинской точки зрения при обследовании пациентов. Возникновение и распространение пульсовой волны по стенкам сосудов обусловлено упругостью аортальной стенки. Дело в том, что во время систолы левого желудочка сила, возникающая при растяжении аорты кровью, направлена не строго перпендикулярно к оси сосуда и может быть разложена на нормальную и тангенциальную составляющие. Непрерывность кровотока обеспечивается первой из них, тогда как вторая является источником артериального импульса, под которым понимают упругие колебания артериальной стенки. ";
+    descPWV+="Для людей молодого и среднего возраста скорость распространения пульсовой волны в аорте равна 5,5-8,0 м/с. С возрастом уменьшается эластичность стенок артерий и скорость пульсовой волны увеличивается. Скорость распространения пульсовой волны в аорте является достоверным методом определения жесткости сосудов. В стандартном её определении используется методика, основанная на измерении пульсовых волн датчиками, установленными в области сонной и бедренной артерий. Определение скорости распространения пульсовой волны и других параметров жесткости сосудов позволяет выявить начало развития тяжелых нарушений сердечно-сосудистой системы и правильно подобрать индивидуальную терапию. ";
+    string descHealthGroups1 = "Различают 3 группы здоровья населения:";
+    string descHealthGroups2 = "I – относительно здоровые; ";
+    string descHealthGroups3 = "II – лица с высоким и очень высоким суммарным риском развития сердечно - сосудистых заболеваний;";
+    string descHealthGroups4 = "III – больные;";
+
+
+        string descBPHigh1 = "Артериальная гипертензия (АГ, гипертония, гипертоническая болезнь) — стойкое повышение артериального давления от 140/90 мм рт. ст. и выше.";
+        string descBPHigh2 = "2 степень АГ: САД 160—179 / ДАД 100—109. ";
+
+    string descUDR = "Метод ультразвуковой диагностики, в котором сочетается допплеровское исследование с традиционным ультразвуковым исследованием. Такой метод диагностики обычно применяется для исследования патологии кровеносных сосудов — вен и артерий. Он позволяет врачу увидеть как структуру самих сосудов, так и ток крови по ним.";
+    string descCT = "Позволяет получить подробное изображение кровеносных сосудов и оценить характер кровотока. После проведения компьютерной томографии с внутривенным контрастным усилением производится анализ полученных данных с применением специальных алгоритмов реконструкции изображений.";
+    string descSclerosis = " Атеросклероз большеберцовых артерий (находятся на задней стороне ноги ниже колена)";
+
+    string descCholesterol = "Химическое соединение жиров и стероидов. Он необходим организму для построения мембран клеток и различных процессов, протекающих в них. Специалисты говорят о высоком уровне холестерина, если он превышает показатель нормы более, чем на треть. Угрозу представляет не весь холестерин, а лишь его часть – липопротеиды низкой плотности (ЛПНП). Именно их излишек откладывается на стенках сосудов, создавая со временем, так называемые атеросклеротические бляшки.";
+    string descArteriesSclerosis = "Заболевание, которое поражает магистральные (крупные) сосуды. При этом происходит отложение холестерина в стенке сосуда, в результате чего возникает атеросклеротическая бляшка, суживающая просвет сосуда. Это приводит к тому, что значительно падает кровоток по пораженному сосуду, причем степень снижения кровотока, как правило, пропорциональна степени стеноза (сужения) сосуда. Атеросклероз приобретает хроническое течение и является самой частой причиной потери трудоспособности и преждевременной смерти. Чаще поражает людей в 40-45 лет и в 3-4 раза чаще мужчин.";
+    string desccfPWV = "Пульсовая волна, измеренная на отрезке сонная артерия - бедро, местами измерения являются сонная артерия и подвздошная артерия";
+    string descbaPWV = "Пульсова волна, измеренная на отрезке плечо - голень, местами измерения являются плечо и лодыжка";
+    string descStenocardia = "Заболевание, распространенное у людей среднего и старшего возраста.Основным симптомом стенокардии являются боли за грудиной. Её причина кроется в частичной непроходимости коронарных артерий, из-за которой сердечная мышца не получает достаточное количество крови, обогащенной кислородом.";
+    string descDiabetes = "Сахарный диабет - это заболевание, обусловленное абсолютной или относительной недостаточностью инсулина и характеризующееся нарушением обмена углеводов с повышением количества глюкозы в крови, а также другими нарушениями обмена веществ.";
+}
+
+<section class="content" id="resultsTableTargetField">
+    <h1 class="page-header">Медицинский глоссарий</h1>
+
+   
+    <div class="panel panel-info" id=@idArteriesSclerosis>
+        <div class="panel-heading" style="text-align:center">
+            @termArteriesSclerosis
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @descArteriesSclerosis
+        </div>
+    </div>
+    
+    
+     <div class="panel panel-info" id=@idDispancerization.ToString()>
+        <div class="panel-heading" style="text-align:center">
+            @termDispancerization
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @descDispancerization1
+            <br/>
+            @descDispancerization2
+            <br/>
+            @descDispancerization3
+            <br/>
+            @descDispancerization4
+        </div>
+    </div>
+
+    <div class="panel panel-info" id=@idScrining.ToString()>
+        <div class="panel-heading" style="text-align:center">
+            @termScrining
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @descScrining1
+            <br/>
+            @descScrining2
+            <br />
+            @descScrining3
+            <br />
+            @descScrining4
+            <br />
+            @descScrining5
+            <br />
+            @descScrining6
+            <br />
+            @descScrining7
+            <br />
+            @descScrining8
+            <br />
+            @descScrining9
+            <br />
+            @descScrining10
+            <br />
+        </div>
+    </div>
+
+    <div class="panel panel-info" id=@idSCORE.ToString()>
+        <div class="panel-heading" style="text-align:center">
+            @termSCORE
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @descSCORE
+            <img src="/Images/score.jpg" width="500">
+        </div>
+    </div>
+
+    <div class="panel panel-info" id=@idAntiHypertenzia.ToString()>
+        <div class="panel-heading" style="text-align:center">
+            @termAntiHypertenzia
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @descAntiHypertenzia
+        </div>
+    </div>
+
+    <div class="panel panel-info" id=@idStatines.ToString()>
+        <div class="panel-heading" style="text-align:center">
+            @termStatines
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @descStatines
+        </div>
+    </div>
+     
+    <div class="panel panel-info" id=@idTriglicerides.ToString()>
+        <div class="panel-heading" style="text-align:center">
+            @termTriglicerides
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @descTriglicerides
+        </div>
+    </div>
+
+    <div class="panel panel-info" id=@idGlucose.ToString()>
+        <div class="panel-heading" style="text-align:center">
+            @termGlucose
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @descGlucose
+        </div>
+    </div>
+
+    <div class="panel panel-info" id=@idCholesterol.ToString()>
+        <div class="panel-heading" style="text-align:center">
+            @termCholesterol
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @descCholesterol
+        </div>
+    </div>
+
+    <div class="panel panel-info" id=@idHCLVP.ToString()>
+        <div class="panel-heading" style="text-align:center">
+            @termHCLVP
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @descHCLVP
+        </div>
+    </div>
+
+    <div class="panel panel-info" id=@idMVS.ToString()>
+        <div class="panel-heading" style="text-align:center">
+            @termMVS
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @descMVS
+        </div>
+    </div>
+
+    <div class="panel panel-info" id=@idBoguchar.ToString()>
+        <div class="panel-heading" style="text-align:center">
+            @termBoguchar
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @descBoguchar
+        </div>
+    </div>
+
+    <div class="panel panel-info" id=@idSBP.ToString()>
+        <div class="panel-heading" style="text-align:center">
+            @termSBP
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @descSBP
+        </div>
+    </div>
+
+    <div class="panel panel-info" id=@idDBP.ToString()>
+        <div class="panel-heading" style="text-align:center">
+            @termDBP
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @descDBP
+        </div>
+    </div>
+
+    <div class="panel panel-info" id=@idABI.ToString()>
+        <div class="panel-heading" style="text-align:center">
+            @termABI
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @descABI
+        </div>
+    </div>
+
+    <div class="panel panel-info" id=@idPWV.ToString()>
+        <div class="panel-heading" style="text-align:center">
+            @termPWV
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @descPWV
+        </div>
+    </div>
+
+    <div class="panel panel-info" id=@idcfPWV.ToString()>
+        <div class="panel-heading" style="text-align:center">
+            @termcfPWV
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @desccfPWV
+        </div>
+    </div>
+
+    <div class="panel panel-info" id=@idbaPWV>
+        <div class="panel-heading" style="text-align:center">
+            @termbaPWV
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @descbaPWV
+        </div>
+    </div>
+
+    <div class="panel panel-info" id=@idHealthGroups.ToString()>
+        <div class="panel-heading" style="text-align:center">
+            @termHealthGroups
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @descHealthGroups1
+            <br/>
+            @descHealthGroups2
+            <br />
+            @descHealthGroups3
+            <br />
+            @descHealthGroups4
+            <br />
+
+        </div>
+    </div>
+
+    <div class="panel panel-info" id=@idBPHigh.ToString()>
+        <div class="panel-heading" style="text-align:center">
+            @termBPHigh
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @descBPHigh1
+            <br/>
+            @descBPHigh2
+            <br />
+        </div>
+    </div>
+
+    <div class="panel panel-info" id=@idUDR.ToString()>
+        <div class="panel-heading" style="text-align:center">
+            @termUDR
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @descUDR
+        </div>
+    </div>
+
+    <div class="panel panel-info" id=@idCT.ToString()>
+        <div class="panel-heading" style="text-align:center">
+            @termCT
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @descCT
+        </div>
+    </div>
+
+    <div class="panel panel-info" id=@idSclerosis.ToString()>
+        <div class="panel-heading" style="text-align:center">
+            @termSclerosis
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @descSclerosis
+        </div>
+    </div>
+
+    <div class="panel panel-info" id=@idStenocardia.ToString()>
+        <div class="panel-heading" style="text-align:center">
+            @termStenocardia
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @descStenocardia
+        </div>
+    </div>
+
+    <div class="panel panel-info" id=@idDiabetes.ToString()>
+        <div class="panel-heading" style="text-align:center">
+            @termDiabetes
+        </div>
+        <div class="panel-body" style="text-align:center">
+            @descDiabetes
+        </div>
+    </div>
+
+</section>

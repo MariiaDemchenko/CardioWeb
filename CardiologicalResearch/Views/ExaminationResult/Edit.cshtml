@@ -1,0 +1,128 @@
+﻿@model CardiologicalResearch.Models.ExaminationResult
+
+@{
+    Layout = null;
+    ViewBag.Title = "Edit";
+    string result = ViewBag.ExaminationResult;
+    List<SelectListItem> datas = ViewBag.ReqiuredData;
+    string successResult="Тест не выявил риск наличия атеросклероза артерий конечностей";
+    string dangerResult ="Тест  выявил риск наличия атеросклероза артерий конечностей";
+
+    string successRecommendation="Для уточнения результатов рекомендуется пройти медицинское обследование";
+    string dangerRecommendation="Следует срочно обратиться в медицинское учреждение";
+
+    string errorResult="Недостаточно данных для прохождения теста. Заполните таблицу показателей.";
+
+    string rowClass;
+    string testName=ViewBag.TestName;
+    
+    string resultText;
+    string recommendationText;
+}
+
+@using CardiologicalResearch.Models;
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-2.2.3.js"></script>
+<link href="~/Content/TestsStyle.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+
+@using (Ajax.BeginForm(
+     "Edit",
+     "ExaminationResult",
+     new AjaxOptions
+     {
+         HttpMethod = "post",
+         UpdateTargetId = "resultsTableTargetField"
+     }))
+     
+{   
+    
+    <section class="content">
+        <link href="~/Content/bootstrap.css" rel="stylesheet" />
+         <h1 class="page-header ph2">Результат теста</h1>
+    <div id="resultsTableTargetField"> 
+    <fieldset>
+        <h2 class="h2 dataTable" >Показатели, необходимые для прохождения теста @testName:</h2>        
+        <table class="table table-bordered table-hover table-striped" >
+            <tr>
+                <th>
+                    Название показателя
+                </th>
+                <th>
+                    Значение показателя
+                </th>
+            </tr>
+
+            @foreach (var item in ViewBag.RequiredData)
+            {
+                if (String.IsNullOrEmpty(item.Value))
+                { rowClass = "warning"; }
+                else { rowClass = "info"; }
+                    
+               
+                <tr class=@rowClass>
+                    <td>
+                        @item.Text
+                    </td>
+                    <td>
+                        @item.Value
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+
+        @if (result != "2") 
+        {
+            if (result == "0") 
+            {
+              <text>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                @successResult
+            </div>
+            <div class="panel-body">@successRecommendation</div>
+        </div>
+
+        </text>  
+            }
+            else if (result == "1")
+            {
+
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                @dangerResult
+            </div>
+            <div class="panel-body">@dangerRecommendation</div>
+        </div>
+ 
+            }          
+        }
+        else 
+        {
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                Пропущенные данные
+            </div>
+            <div class="panel-body">@errorResult</div>
+        </div>
+ 
+            }    
+
+        @Html.HiddenFor(model => model.ExaminationResultId)
+        @Html.HiddenFor(model => model.ExaminationId)
+        @Html.HiddenFor(model => model.TestId)
+        @Html.HiddenFor(model => model.Result)
+
+        <p>
+            <button type ="submit" class="btn successBtn" >Запомнить результат</button>
+            @Html.ActionLink("Назад", "ChooseTest", null, new {@class="btn btn-default" })
+        </p>
+    </fieldset>
+
+    </div>
+        </section>
+}

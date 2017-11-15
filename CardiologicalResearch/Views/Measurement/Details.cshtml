@@ -1,0 +1,159 @@
+﻿@model CardiologicalResearch.Models.Measurement
+
+@{
+    ViewBag.Title = "Details";
+    Layout = null;
+}
+<script src="~/Scripts/jquery-2.2.3.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+@using CardiologicalResearch
+@using CardiologicalResearch.Models
+
+@{
+    var modalContent= string.Empty;
+    var characteristic = string.Empty;
+}
+
+@using (Ajax.BeginForm(
+     "Details",
+     "Data",
+     new AjaxOptions
+     {
+
+         HttpMethod = "get",
+         UpdateTargetId = "dataTargetField",
+         OnSuccess = "$('body').removeClass('modal-open'); $('.modal-backdrop').remove();"
+     }))
+{
+     <div class="modal-body">
+         @if (Model.ParameterId == ParameterType.Age)
+         {
+         modalContent= Constants.AgeDescription;
+         characteristic = Constants.Ordered;
+         }
+         @if (Model.ParameterId == ParameterType.Weight)
+         {
+             modalContent = Constants.WeightDescription;
+             characteristic = Constants.Ordered;
+         }
+         else if (Model.ParameterId == ParameterType.Height)
+         {
+             modalContent = Constants.HeightDescription;
+             characteristic = Constants.Ordered;
+         }
+         else if (Model.ParameterId == ParameterType.Waist)
+         {
+             modalContent = Constants.WaistDescription;
+             characteristic = Constants.Ordered;
+         }
+         else if (Model.ParameterId == ParameterType.SBPra)
+         {
+             modalContent = Constants.SBPraDescription;
+             characteristic = Constants.Ordered;
+         }
+         else if (Model.ParameterId == ParameterType.DBPra)
+         {
+             modalContent = Constants.DBPraDescription;
+             characteristic = Constants.Ordered;
+         }
+         else if (Model.ParameterId == ParameterType.SBPll)
+         {
+             modalContent = Constants.SBPllDescription;
+             characteristic = Constants.Ordered;
+         }
+         else if (Model.ParameterId == ParameterType.SBPrl)
+         {
+             modalContent = Constants.SBPrlDescription;
+             characteristic = Constants.Ordered;
+         }
+
+         else if (Model.ParameterId == ParameterType.Pulse)
+         {
+             modalContent = Constants.PulseDescription;
+             characteristic = Constants.Ordered;
+         }
+         else if (Model.ParameterId == ParameterType.CfPWV)
+         {
+             modalContent = Constants.CfPWV10Description;
+             characteristic = Constants.Ordered;
+         }
+         else if (Model.ParameterId == ParameterType.BaPWV)
+         {
+             modalContent = Constants.BaPWVDescription;
+             characteristic = Constants.Ordered;
+         }
+         else if (Model.ParameterId == ParameterType.Glucose)
+         {
+             modalContent = Constants.GlucoseDescription;
+             characteristic = Constants.Ordered;
+         }
+         else if (Model.ParameterId == ParameterType.SCORE)
+         {
+             modalContent = Constants.SCOREDescription;
+             characteristic = Constants.Ordered;
+         }
+         else if (Model.ParameterId == ParameterType.Gender)
+         {
+             modalContent = Constants.GenderDescription;
+             characteristic = Constants.Categorial;
+         }
+         else if (Model.ParameterId == ParameterType.Smoker)
+         {
+             modalContent = Constants.SmokeDescription;
+             characteristic = Constants.Categorial;
+         }
+         else if (Model.ParameterId == ParameterType.Stenocardia)
+         {
+             modalContent = Constants.StenocardiaDescription;
+             characteristic = Constants.Categorial;
+         }
+         else if (Model.ParameterId == ParameterType.Diabetes)
+         {
+             modalContent = Constants.DiabetesDescription;
+             characteristic = Constants.Categorial;
+         }
+         else if (Model.ParameterId == ParameterType.BMI)
+         {
+             modalContent = Constants.BMIDescription;
+             characteristic = Constants.Ordered;
+         }
+         else if (Model.ParameterId == ParameterType.CfPWV10)
+         {
+             modalContent = Constants.CfPWV10Description;
+             characteristic = Constants.Categorial;
+         }
+<fieldset>
+    <legend>Data</legend>
+
+    <div class="display-label">
+         @Html.HiddenFor(model => model.Value)
+    </div>
+    <div class="display-field">
+        @Html.HiddenFor(model => model.Value)
+    </div>
+
+    <div class="display-label">
+         @Html.HiddenFor(model => model.MedicalRecord.MedicalRecordId)
+    </div>
+    <div class="display-field">
+        @Html.HiddenFor(model => model.MedicalRecord.MedicalRecordId)
+    </div>
+
+    <div class="panel panel-info">
+        <div class="panel-heading" style="text-align:center">
+            @Model.ParameterId
+        </div>
+        <div class="panel-body" style="text-align:center">
+           @modalContent
+        </div>
+        <div class="panel-footer" style="font-style:italic; text-align:center">@characteristic</div>
+    </div>
+
+</fieldset>
+         </div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Ок</button>
+</div>
+}

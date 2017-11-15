@@ -1,0 +1,22 @@
+﻿@model CardiologicalResearch.Models.ExaminationResult
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>ExaminationResult</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Examination.ExaminationId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Examination.ExaminationId)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ExaminationResultId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

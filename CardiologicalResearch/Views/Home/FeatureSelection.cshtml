@@ -1,0 +1,273 @@
+﻿@{
+    ViewBag.Title = "FesatureSelection";
+}
+
+<link href="~/Content/TestsStyle.css" rel="stylesheet" />
+
+@section featured {
+    <section class="featured" id="featureSelection"></section>
+}
+
+<script src="~/Scripts/jquery-ui-1.8.24.js"></script>
+<script src="~/Scripts/jquery-2.2.3.js"></script>
+<script src="~/Scripts/Chart.js"></script>
+@{
+
+    string Text;
+   
+    string ABI = "ЛПИ<0.9";
+
+}
+
+<section class="content" id="dataTableTargetField">
+    <h1 class="page-header">Отбор признаков</h1>
+
+    <h2 class="h2 dataTable">
+    Проблема отбора признаков часто возникает из-за того, что на этапах постановки задачи и формирования данных еще не ясно, какие признаки бесполезны и или дублируют друг друга.
+    Основной целью данного метода является исключение неважных или избыточных переменных в исходном наборе характеристик, а также выделение отдельных групп переменных, заслуживающих включения в дальнейшее построение классификационных моделей.
+    </h2>
+
+
+    <h2 class="h2 dataTable">Наиболее значимые предикторы для ArmsIndex15</h2>
+    <canvas id="myPieChart1" style="width:10px; height:10px"></canvas>
+
+
+
+
+    <h2 class="h2 dataTable">Наиболее значимые предикторы для LegsIndex15</h2>
+    <canvas id="myPieChart2" style="width:10px; height:10px"></canvas>
+    <h2 class="h2 dataTable">Наиболее значимые предикторы для @ABI</h2>
+    <canvas id="myPieChart3" style="width:10px; height:10px"></canvas>
+    <h2 class="h2 dataTable">Наиболее значимые предикторы для Sclerosis a.tibialis</h2>
+    <canvas id="myPieChart4" style="width:10px; height:10px"></canvas>
+
+
+    <script>
+        var ctx1 = document.getElementById("myPieChart1");
+
+        var grey = "#E7E9ED";
+        var red = "#FF6384";
+        var orange = "#FF9063";
+        var yellow = "#FFCE56";
+        var green = "#4BC0C0";
+        var lightblue = "#68C0EB";
+        var blue = "#36A2EB";
+        var purple = "#9368EB";
+        var pink = "#EB68C0";
+        var brown = "#A35568";
+        var darkPurple = "#6648a4";
+        var lightGreen = "#93D9D9";
+
+    var myPieChart1 = new Chart(ctx1, {
+    type: 'pie',
+    data: {
+    labels: [
+    "Ожирение",
+    "ДАДпр",
+    "АО",
+    "СД",
+    "САДпр",
+    "SCORE",
+    "cfPWV",
+    "Глюкоза",
+    "baPWV"
+    ],
+    datasets: [
+    {
+    data: [12.21884, 6.90796, 6.86260, 5.77800, 4.22836, 3.38570, 2.72515, 2.37941, 2.33960],
+    backgroundColor: [      
+        /*"#E7E9ED",
+        "#E7E9ED",
+        "#E7E9ED",
+        "#E7E9ED",
+        "#E7E9ED",
+        "#E7E9ED",
+        "#E7E9ED",
+        "#E7E9ED",
+        "#E7E9ED"*/
+        brown,
+    red,
+    pink,
+    orange,
+    yellow,
+    green,
+    lightblue,
+    blue,
+    purple
+    
+    ],
+    hoverBackgroundColor: [
+
+    brown,
+    red,
+    pink,
+    orange,
+    yellow,
+    green,
+    lightblue,
+    blue,
+    purple
+    ]
+    }]
+
+    }
+    });
+
+
+    var ctx2 = document.getElementById("myPieChart2");
+
+    var grey = "#E7E9ED";
+    var red = "#FF6384";
+    var orange = "#FF9063";
+    var yellow = "#FFCE56";
+    var green = "#4BC0C0";
+    var lightblue = "#68C0EB";
+    var blue = "#36A2EB";
+    var purple = "#9368EB";
+    var pink = "#EB68C0";
+    var brown = "#A35568";
+
+
+    var myPieChart2 = new Chart(ctx2, {
+        type: 'pie',
+        data: {
+            labels: [
+                "baPWV",
+                "Пол",
+                "ЧСС",
+                "САДлн",
+                "САДлр",
+                "Глюкоза",
+                "cfPWV",
+                "САДпр"
+            ],
+            datasets: [
+            {
+                data: [4.286597, 4.231067, 4.184793, 3.703649, 3.133013, 2.540306, 2.324433, 1.914799],
+                backgroundColor: [
+                    /*"#E7E9ED",
+                    "#E7E9ED",
+                    "#E7E9ED",
+                    "#E7E9ED",
+                    "#E7E9ED",
+                    "#E7E9ED",
+                    "#E7E9ED",
+                    "#E7E9ED",
+                    "#E7E9ED"*/
+                    brown,
+                red,
+                orange,
+                yellow,
+                green,
+                lightblue,
+                blue,
+                purple
+
+                ],
+                hoverBackgroundColor: [
+
+                brown,
+                red,
+                orange,
+                yellow,
+                green,
+                lightblue,
+                blue,
+                purple
+                ]
+            }]
+
+        }
+    });
+
+
+    var ctx3 = document.getElementById("myPieChart3");
+
+
+
+    var myPieChart3 = new Chart(ctx3, {
+        type: 'pie',
+        data: {
+            labels: [
+                "СД",
+                "САДлн",
+                "САДпн",
+                "ОНМК",
+                "ЧСС",
+                "SCORE",
+                "Глюкоза",
+                "Вес",
+                "baPWV"     
+            ],
+            datasets: [
+            {
+                data: [11.01000, 9.45375, 6.55051, 6.50138, 3.94498, 3.76897, 3.64778, 2.88793, 2.16171],
+                backgroundColor: [
+                brown,
+                red,
+                pink,
+                orange,
+                yellow,
+                green,
+                lightblue,
+                blue,
+                purple
+
+                ],
+                hoverBackgroundColor: [
+                brown,
+                red,
+                pink,
+                orange,
+                yellow,
+                green,
+                lightblue,
+                blue,
+                purple
+                ]
+            }]
+
+        }
+    });
+
+    var ctx4 = document.getElementById("myPieChart4");
+
+
+
+    var myPieChart4 = new Chart(ctx4, {
+        type: 'pie',
+        data: {
+            labels: [
+                "САДпр",
+                "ДАДпр",
+                "cfPWV",
+                "ОХ"
+            ],
+            datasets: [
+            {
+                data: [5.933820, 2.531708, 2.205914, 2.092337],
+                backgroundColor: [
+                red,
+                yellow,
+                green,
+                blue
+                ],
+                hoverBackgroundColor: [
+                red,
+                yellow,
+                green,
+                blue
+                ]
+            }]
+
+        }
+    });
+
+
+
+
+
+
+        </script>
+
+</section>

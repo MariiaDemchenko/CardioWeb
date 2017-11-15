@@ -1,0 +1,99 @@
+﻿@model IEnumerable<CardiologicalResearch.Models.ExaminationResult>
+@{
+    ViewBag.Title = "ResultsTable";
+    string rowClass = "warning";
+    string state = "Пройти тест";
+}
+
+@using CardiologicalResearch.Models;
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+<link href="~/Content/TestsStyle.css" rel="stylesheet" />
+
+<section class="content">
+    <div id="resultsTableTargetField">
+        
+                <h1 class="page-header ph2">Выбор тестов</h1>
+
+        <h2 class="h2 dataTable">Таблица результатов</h2>
+        <table class="table table-bordered table-hover table-striped">
+            <tr style="background-color: #4BC0C0">
+                <th>
+                    Название теста
+                </th>
+                <th>
+                    Результат прохождения
+                </th>
+                <th>
+                    Выбор теста
+                </th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                if (item.Result == TestResultType.Unknown)
+                {
+                    rowClass = "warning";
+                    state = "Пройти тест";
+                }
+                else if (item.Result == TestResultType.Success)
+                {
+                    rowClass = "success";
+                    state = "Тест пройден";
+                }
+                else if (item.Result == TestResultType.Danger)
+                {
+                    rowClass = "danger";
+                    state = "Тест пройден";
+                }
+                else if (item.Result == TestResultType.Error)
+                {
+                    rowClass = "error";
+                    state = "Тест пройден";
+                }
+
+                <tr class=@rowClass>
+                    <td>
+                        @if (item.TestId == TestType.ABI)
+                        {
+                            <text>
+                        ЛПИ 0.9
+                        </text> 
+                        }
+                        else if (item.TestId == TestType.Sclerosis)
+                        {
+                            <text>
+                        Sclerosis a tibialis
+                        </text> 
+                        }
+                        else 
+                        {
+                             @Html.DisplayFor(modelItem => item.TestId)
+                        }
+                       
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Result)
+                    </td>
+
+                    <td>
+                         
+                        @Ajax.ActionLink(@state,
+                "Edit", new { id = item.ExaminationResultId },
+         new AjaxOptions
+         {
+             UpdateTargetId = "resultsTableTargetField",
+             InsertionMode = InsertionMode.Replace,
+             HttpMethod = "get"
+         })
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+
+</section>

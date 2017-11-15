@@ -1,0 +1,39 @@
+﻿@model IEnumerable<CardiologicalResearch.Models.Examination>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ExaminationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MedicalRecord.MedicalRecordId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExaminationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MedicalRecord.MedicalRecordId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ExaminationId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ExaminationId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ExaminationId })
+        </td>
+    </tr>
+}
+
+</table>

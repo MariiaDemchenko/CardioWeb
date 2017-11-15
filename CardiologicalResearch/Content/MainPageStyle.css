@@ -1,0 +1,48 @@
+﻿.div.row {
+background-size:cover;
+border-radius: 4px 4px;
+}
+
+
+.btn.default.thumb{
+    background-color: #efeeef
+    
+}
+
+.div.img.thumb{
+    width:300px;
+    height:160px;
+}
+
+.h3.thumb{
+    color:#FF0066;
+    text-align:left;
+}
+
+p.thumb{
+    text-align:left;
+    font-size:16px;
+}
+
+.h1.main{
+    font-size:24px;
+    /*color:#808080;*/
+    color:white;
+}
+
+.h2.main{
+    font-size:22px;
+    font-style: italic;
+    color:white;
+}
+
+#body{
+
+}
+
+#headerContent{
+}
+
+.featured{
+ background: url("../Images/mainBackground.png") repeat;
+}

@@ -1,0 +1,115 @@
+﻿@model IEnumerable<CardiologicalResearch.Models.Measurement>
+@{
+    ViewBag.Title = "DataTable";
+    string rowClass;
+    //Layout = null;
+}
+
+<!--<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery-1.9.1.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>-->
+<script src="~/Scripts/jquery.validate.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<!--<link href="~/Content/bootstrap-theme.css" rel="stylesheet" />-->
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery-2.2.3.js"></script>
+<link href="~/Content/TestsStyle.css" rel="stylesheet" />
+@*using (Ajax.BeginForm(
+     "DataTable",
+     "Data",
+     new AjaxOptions
+     {
+
+         HttpMethod = "post",
+         UpdateTargetId = "dataTargetField",
+         OnSuccess = "$('body').removeClass('modal-open'); $('.modal-backdrop').remove();"
+
+     })) { 
+    *@
+    
+    <section class="content">
+<div id="dataTableTargetField">
+    <h1 class="page-header">Тестирование </h1> <h1 class="page-header ph2">Внести изменения в таблицу данных</h1>
+    <h2 class="h2 dataTable">Таблица данных</h2>
+    <table class="table table-bordered table-hover table-striped">
+        <tr>
+            <th>
+                @*Html.DisplayNameFor(model => model.ParameterId)*@
+                Название показателя
+            </th>
+            <th>
+                @*Html.DisplayNameFor(model => model.Value)*@
+                Значение показателя
+            </th>
+            <th>
+
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            if (String.IsNullOrEmpty(item.Value)) { rowClass = "warning"; }
+            else { rowClass = "info"; }
+            <tr class=@rowClass>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParameterId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Value)
+                </td>
+                <td>
+                    @Ajax.ActionLink("Изменить",
+  "Edit", new { id = item.MeasurementId },
+         new AjaxOptions
+         {
+             //UpdateTargetId = "dataTableTargetField",
+             //InsertionMode = InsertionMode.Replace,
+             HttpMethod = "get",
+             OnSuccess = "asuccess(data)"
+         })
+                    |
+                                       
+                    @Ajax.ActionLink("Описание",
+  "Details", new { id = item.MeasurementId },
+         new AjaxOptions
+         {
+             //UpdateTargetId = "dataTableTargetField",
+             //InsertionMode = InsertionMode.Replace,
+             HttpMethod = "get",
+             OnSuccess = "asuccess(data)"
+         })
+                    @*@Html.ActionLink("Details", "Details", new { id = item.DataId }) |
+    Html.ActionLink("Delete", "Delete", new { id = item.DataId })*@
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+
+
+    <div id="myModal" class="modal fade" data-id=item.DataId; role="dialog" aria-labelledby="myModalLabel" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript">
+        function asuccess(data) {
+            $('.modal-content').html(data); $('#myModal').modal('show');
+        }
+    </script>
+
+
+</div>
+</section>
